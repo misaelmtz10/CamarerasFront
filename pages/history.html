@@ -15,7 +15,8 @@
 </head>
 
 <body>
-    <nav class="mb-1 navbar navbar-expand-lg navbar-dark" style="background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);">
+    <nav class="mb-1 navbar navbar-expand-lg navbar-dark"
+        style="background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);">
         <a class="navbar-brand" href="#" style="color: whitesmoke !important;">Historial de Edificios</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
             style="background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);"
@@ -38,8 +39,7 @@
     </nav>
     <!--/.Navbar -->
     <div class="card card-cascade narrower border border-light">
-        <div class="py-2 d-flex justify-content-between align-items-center"
-        style="background: #22254C;">
+        <div class="py-2 d-flex justify-content-between align-items-center" style="background: #22254C;">
             <div class="row">
                 <label for=""></label>
             </div>
@@ -109,97 +109,7 @@
 
     <!-- MDB -->
     <script type="text/javascript" src="/js/mdb.min.js"></script>
-    <!-- Custom scripts -->
-
-    <script>
-        function doSearch() {
-
-            const tableReg = document.getElementById('datos');
-
-            const searchText = document.getElementById('searchTerm').value.toLowerCase();
-
-            let total = 0;
-
-            // Recorremos todas las filas con contenido de la tabla
-
-            for (let i = 1; i < tableReg.rows.length; i++) {
-
-                // Si el td tiene la clase "noSearch" no se busca en su contenido
-
-                if (tableReg.rows[i].classList.contains("noSearch")) {
-
-                    continue;
-
-                }
-
-
-
-                let found = false;
-
-                const cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
-
-                // Recorremos todas las celdas
-
-                for (let j = 0; j < cellsOfRow.length && !found; j++) {
-
-                    const compareWith = cellsOfRow[j].innerHTML.toLowerCase();
-
-                    // Buscamos el texto en el contenido de la celda
-
-                    if (searchText.length == 0 || compareWith.indexOf(searchText) > -1) {
-
-                        found = true;
-
-                        total++;
-
-                    }
-
-                }
-
-                if (found) {
-
-                    tableReg.rows[i].style.display = '';
-
-                } else {
-
-                    // si no ha encontrado ninguna coincidencia, esconde la
-
-                    // fila de la tabla
-
-                    tableReg.rows[i].style.display = 'none';
-
-                }
-
-            }
-
-
-
-            // mostramos las coincidencias
-
-            const lastTR = tableReg.rows[tableReg.rows.length - 1];
-
-            const td = lastTR.querySelector("td");
-
-            lastTR.classList.remove("hide", "red");
-
-            if (searchText == "") {
-
-                lastTR.classList.add("hide");
-
-            } else if (total) {
-
-                td.innerHTML = "Se ha encontrado " + total + " coincidencia" + ((total > 1) ? "s" : "");
-
-            } else {
-
-                lastTR.classList.add("red");
-
-                td.innerHTML = "No se han encontrado coincidencias";
-
-            }
-
-        }
-    </script>
+    <script src="/js/edit.js"></script>
 </body>
 
 </html>
