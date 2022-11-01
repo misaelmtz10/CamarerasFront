@@ -1,0 +1,381 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+input {
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  min-height: 100vh;
+  overflow: hidden;
+  background-image: radial-gradient(circle at 85.36% 111.24%, #ffffff 0, #ffffff 16.67%, #ffffff 33.33%, #f1f9f9 50%, #cce1e3 66.67%, #afcfd3 83.33%, #9ac0c8 100%);
+}
+
+.forms-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+button:focus {
+  outline: 0;
+}
+
+
+img,
+embed,
+svg,
+audio,
+canvas,
+iframe,
+video {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+hr {
+  height: 0;
+  border: 0;
+  border-bottom: 1px solid #dfdfdf;
+  margin: 0;
+}
+
+h1 {
+  font-size: 4rem;
+  margin-top: 0;
+  margin-bottom: 80px;
+}
+
+h1 span {
+  color: #000;
+}
+
+p {
+  margin: 0;
+}
+
+.cards-grid {
+  display: flex;
+  grid-gap: 60px;
+  padding-bottom: 60px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* FLIP CARD */
+.flip-card {
+  width: 140px;
+  height: 200px;
+  flex-wrap: wrap;
+  perspective: 2000px;
+}
+.flip-card-inner-2 {
+  position: relative;
+  width: 140px;
+  height: 200px;
+  background-image: radial-gradient(circle at 0% 0%, #ffffff 0, #ffffff 50%, #f3f8f7 100%);
+  box-shadow: 0 4px 20px rgba(88, 100, 93, 0.749);
+  border-radius: 28px;
+  transition: all 550ms cubic-bezier(0.1, 0.22, 0.8, 1.13);
+  transform-style: preserve-3d;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 140px;
+  height: 200px;
+  background-image: radial-gradient(circle at 0% 0%, #ffffff 0, #ffffff72 50%, #f3f8f7 100%);
+  box-shadow: 0 4px 20px rgba(88, 100, 93, 0.749);
+  border-radius: 28px;
+  transition: all 550ms cubic-bezier(0.1, 0.22, 0.8, 1.13);
+  transform-style: preserve-3d;
+}
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 140px;
+  height: 220px;
+  border-radius: 28px;
+  backface-visibility: hidden;
+}
+.flip-card-front {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.flip-card-back {
+  font-size: 1.25rem;
+  text-align: center;
+  background-color: #fff;
+  transform: rotateY(180deg);
+}
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(-180deg);
+}
+
+#global{
+	overflow-y: scroll;
+}
+
+#global::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+#global::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+#global::-webkit-scrollbar-thumb
+{
+	background-color: #000000;
+	border: 2px solid #555555;
+}
+
+strong {
+    font-size: 120px;
+    font: 70000 4em/1 "Oswald", sans-serif;
+    letter-spacing: 0;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    color: #fff;
+    text-shadow: 0 0 80px rgba(255,255,255,.5);
+
+/* Clip Background Image */
+
+}
+
+#desabilitado{
+  font-size: 120px;
+    font: 70000 4em/1 "Oswald", sans-serif;
+    letter-spacing: 0;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    color: #000;
+    text-shadow: 0 0 80px rgba(255,255,255,.5);
+}
+
+h1{
+  font-size: 200px;
+  font: 70000 4em/1 "Oswald", sans-serif;
+  letter-spacing: 0;
+  padding: .25em 0 .325em;
+  display: block;
+  margin: 0 auto;
+  text-shadow: 0 0 80px rgba(255,255,255,.5);
+}
+p{
+  font-size: 50px;
+  color: #000;
+  letter-spacing: 0;
+  font: 70000 4em/1 "Oswald", sans-serif;
+  text-shadow: 0 0 80px rgba(255,255,255,.5);
+}
+
+.flip-card-inner.success {
+  position: relative;
+  width: 140px;
+  height: 220px;
+  background: linear-gradient(45deg,#4099ff,#73b4ff);
+  box-shadow: 0 4px 20px rgba(10, 224, 100, 0.762);
+  border-radius: 28px;
+  transition: all 550ms cubic-bezier(0.1, 0.22, 0.8, 1.13);
+  transform-style: preserve-3d;
+}
+
+.flip-card-inner.primary {
+  position: relative;
+  width: 140px;
+  height: 220px;
+  background: linear-gradient(45deg,#4099ff,#73b4ff);
+  box-shadow: 0 4px 20px rgba(24, 10, 224, 0.762);
+  border-radius: 28px;
+  transition: all 550ms cubic-bezier(0.1, 0.22, 0.8, 1.13);
+  transform-style: preserve-3d;
+}
+
+.flip-card-inner.danger {
+  position: relative;
+  width: 140px;
+  height: 220px;
+  background: linear-gradient(45deg,#4099ff,#73b4ff);
+  box-shadow: 0 4px 20px rgba(224, 10, 10, 0.762);
+  border-radius: 28px;
+  transition: all 550ms cubic-bezier(0.1, 0.22, 0.8, 1.13);
+  transform-style: preserve-3d;
+}
+
+#buscador{
+  width: 50vw;
+  padding: 10px;
+  outline: none;
+  background: linear-gradient(45deg,#4099ff69,#73b4ff69);
+  border-radius: 10px;
+  border: 5px solid #73b4ff;
+  box-shadow: 0 2px 10px rgba(88, 100, 93, 0.749);
+  font-weight: 600;
+}
+
+#listaCards{
+  font-size: 30px;
+  margin-top: 20px;
+  list-style: none;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+}
+
+.filtro{
+  display: none;
+        background-color: #006100;
+        width: 140px;
+        height: 140px;
+}
+
+.img-thumbnail {
+  text-align: center;
+  align-items: middle;
+  margin-top: 25px;
+}
+
+#fondo{
+    width: 100%;
+    min-height: 100vh;
+    display: relative;
+    margin: 0;
+    padding: 0;
+    background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);
+}
+
+a#pills-home-tab:hover{
+  background: #05b600 !important;
+}
+a#pills-profile-tab:hover{
+  background: #d50000 !important;
+}
+a#pills-contact-tab:hover{
+  background: #4481eb !important;
+}
+
+.file-upload {
+  background-color: #ffffff;
+}
+
+.file-upload-btn {
+  width: 100%;
+  margin: 0;
+  color: #fff;
+  background: #4481eb;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  border-bottom: 4px solid #4481eb;
+  transition: all .2s ease;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.file-upload-btn:hover {
+  background: #4481eb;
+  color: #ffffff;
+  transition: all .2s ease;
+  cursor: pointer;
+}
+
+.file-upload-btn:active {
+  border: 0;
+  transition: all .2s ease;
+}
+
+.file-upload-content {
+  display: none;
+  text-align: center;
+}
+
+.file-upload-input {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.image-upload-wrap {
+  margin-top: 20px;
+  border: 4px dashed #4481eb;
+  position: relative;
+}
+
+.image-dropping,
+.image-upload-wrap:hover {
+  background-color: #4481eb;
+  border: 4px dashed #ffffff;
+}
+
+.image-title-wrap {
+  padding: 0 15px 15px 15px;
+  color: #222;
+}
+
+.drag-text {
+  text-align: center;
+}
+
+.drag-text h3 {
+  font-weight: 100;
+  text-transform: uppercase;
+  color: #4481eb;
+  padding: 60px 0;
+}
+
+.file-upload-image {
+  margin: auto;
+}
+
+.remove-image {
+  width: 200px;
+  margin: 0;
+  color: #fff;
+  background: #cd4535;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  border-bottom: 4px solid #b02818;
+  transition: all .2s ease;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.remove-image:hover {
+  background: #c13b2a;
+  color: #ffffff;
+  transition: all .2s ease;
+  cursor: pointer;
+}
+
+.remove-image:active {
+  border: 0;
+  transition: all .2s ease;
+}

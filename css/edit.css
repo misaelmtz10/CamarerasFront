@@ -1,0 +1,70 @@
+body {
+  width: 100%;
+  min-height: 100vh;
+  display: relative;
+  margin: 0;
+  padding: 0;
+  background-image: radial-gradient(circle at 85.36% 111.24%, #ffffff 0, #ffffff 16.67%, #ffffff 33.33%, #f1f9f9 50%, #cce1e3 66.67%, #afcfd3 83.33%, #9ac0c8 100%);
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body,
+  input {
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .container {
+    position: relative;
+    width: 100%;
+    background-color: #fff;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+  
+  .forms-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  #activo{
+    background-image: linear-gradient(225deg, #43dc38 0%, #43dc38 100%);
+  }
+
+  #cancel{
+    background-image: linear-gradient(225deg, #d50000 0, #d50000 50%, #d50000 100%);
+  }
+
+  #default{
+    background-image: linear-gradient(225deg, #787171 0, #787171 50%, #787171 100%);
+  }
+
+  h4{
+    color: whitesmoke;
+    font-size: 20px;
+    font-style: bold;
+  }
+
+  img{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+
+  datos {border:1px solid #ccc;padding:10px;font-size:1em;}
+
+  datos tr:nth-child(even) {background:#ccc;}
+
+  datos td {padding:5px;}
+
+  datos tr.noSearch {background:White;font-size:0.8em;}
+
+  datos tr.noSearch td {padding-top:10px;text-align:right;}
+
+  .hide {display:none;}
+
+  .red {color:Red;}

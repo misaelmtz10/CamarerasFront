@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Habitaciones</title>
+  <link rel="shortcut icon" href="/img/Corona.ico" />
+  <!-- Font Awesome -->
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <!-- Google Fonts Roboto -->
+  <!-- MDB -->
+  <link rel="stylesheet" href="/css/target.css" />
+  <link rel="stylesheet" href="/css/mdb.min.css" />
+</head>
+
+<body id="global">
+  <div id="fondo">
+    <nav class="mb-1 navbar navbar-expand-lg navbar-dark"
+      style="background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);">
+      <a class="navbar-brand" href="#" style="color: whitesmoke !important;"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
+        style="background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);"
+        aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/pages/home.html">
+              <i class="fa-solid fa-house-user"></i>&nbsp; Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/index.html">
+              <i class="fa-solid fa-person-walking-arrow-right"></i>&nbsp; Cerrar Sesión</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="forms-container">
+        <div class="row">
+          <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                aria-controls="pills-home" aria-selected="true">Asignadas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+                aria-controls="pills-profile" aria-selected="false">Desabilitadas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"
+                aria-controls="pills-contact" aria-selected="false">limpias</a>
+            </li>
+          </ul>
+        </div>
+        <div class="row">
+          <div>
+            <p class="text-center">Habitaciones</p>
+          </div>
+          <div class="row">
+            <div class="tab-content pt-2 pl-1" id="pills-tabContent">
+              <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="row">
+                  <div class="text-center">
+                    <input type="text" name="buscador" id="buscador" placeholder="Buscar...">
+                    <h1></h1>
+                  </div>
+                  <div class="col-md-2 col-6">
+                    <div class="cards-grid habitaciones">
+                      <div class="flip-card">
+                        <div class="flip-card-inner"
+                          style="box-shadow: rgba(0, 255, 8, 0.4) 0px 5px, rgba(1, 246, 50, 0.3) 0px 10px, rgba(9, 244, 0, 0.2) 0px 15px, rgba(0, 240, 8, 0.1) 0px 20px, rgba(31, 236, 0, 0.05) 0px 25px;">
+                          <div class="flip-card-front">
+                            <strong class="text-center" id="desabilitado"> 1 </strong>
+                          </div>
+                          <div class="flip-card-back">
+                            <div class="row">
+                              <h3>Acciones</h3>
+                              <div class="col-md-12">
+                                <div class="col-md-12 text-center">
+                                  <button type="button" data-mdb-toggle="tooltip" data-mdb-placement="bottom"
+                                    title="Limpiar" onClick="limpiar()" class="btn btn-primary btn-floating">
+                                    <i class="fa-solid fa-broom"></i>
+                                  </button>
+                                </div>
+                                <br>
+                              </div>
+                              <div class="col-md-12">
+                                <div class="col-md-12 text-center">
+                                  <button type="button" class="btn btn-success btn-floating" data-toggle="modal"
+                                    data-target="#basicExampleModal">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                  </button>
+                                </div>
+                                <br>
+                              </div>
+                              <div class="col-md-12">
+                                <div class="col-md-12 text-center">
+                                  <form action="/pages/history.html">
+                                    <button type="submit" class="btn btn-info btn-floating">
+                                      <i class="fa-solid fa-clock"></i>
+                                    </button>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2 col-6">
+                    <div class="cards-grid habitaciones">
+                      <div class="flip-card">
+                        <div class="flip-card-inner"
+                          style="box-shadow: rgba(0, 255, 8, 0.4) 0px 5px, rgba(1, 246, 50, 0.3) 0px 10px, rgba(9, 244, 0, 0.2) 0px 15px, rgba(0, 240, 8, 0.1) 0px 20px, rgba(31, 236, 0, 0.05) 0px 25px;">
+                          <div class="flip-card-front">
+                            <strong class="text-center" id="desabilitado"> 2 </strong>
+                          </div>
+                          <div class="flip-card-back">
+                            <div class="row">
+                              <h3>Acciones</h3>
+                              <div class="col-md-12">
+                                <div class="col-md-12 text-center">
+                                  <form action="/pages/offline.html">
+                                    <button type="submit" data-mdb-toggle="tooltip" data-mdb-placement="bottom"
+                                      title="Limpiar" class="btn btn-primary btn-floating">
+                                      <i class="fa-solid fa-broom"></i>
+                                    </button>
+                                  </form>
+                                </div>
+                                <br>
+                              </div>
+                              <div class="col-md-12">
+                                <div class="col-md-12 text-center">
+                                  <button type="button" class="btn btn-success btn-floating" data-toggle="modal"
+                                    data-target="#basicExampleModal">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                  </button>
+                                </div>
+                                <br>
+                              </div>
+                              <div class="col-md-12">
+                                <div class="col-md-12 text-center">
+                                  <form action="/pages/history.html">
+                                    <button type="button" class="btn btn-info btn-floating">
+                                      <i class="fa-solid fa-clock"></i>
+                                    </button>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2 col-6">
+                    <div class="cards-grid habitaciones">
+                      <div class="flip-card">
+                        <div class="flip-card-inner"
+                          style="box-shadow: rgba(46, 240, 53, 0.4) 0px 5px, rgba(46, 240, 85, 0.3) 0px 10px, rgba(53, 240, 46, 0.2) 0px 15px, rgba(46, 240, 53, 0.1) 0px 20px, rgba(72, 240, 46, 0.05) 0px 25px;">
+                          <div class="flip-card-front">
+                            <strong class="text-center" id="desabilitado"> 3 </strong>
+                          </div>
+                          <div class="flip-card-back">
+                            <div class="row">
+                              <h3>Acciones</h3>
+                              <div class="col-md-12">
+                                <div class="col-md-12 text-center">
+                                  <form action="/pages/offline.html">
+                                    <button type="submit" data-mdb-toggle="tooltip" data-mdb-placement="bottom"
+                                      title="Limpiar" class="btn btn-primary btn-floating">
+                                      <i class="fa-solid fa-broom"></i>
+                                    </button>
+                                  </form>
+                                </div>
+                                <br>
+                              </div>
+                              <div class="col-md-12">
+                                <div class="col-md-12 text-center">
+                                  <button type="button" class="btn btn-success btn-floating" data-toggle="modal"
+                                    data-target="#basicExampleModal">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                  </button>
+                                </div>
+                                <br>
+                              </div>
+                              <div class="col-md-12">
+                                <div class="col-md-12 text-center">
+                                  <form action="/pages/history.html">
+                                    <button type="button" class="btn btn-info btn-floating">
+                                      <i class="fa-solid fa-clock"></i>
+                                    </button>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2 col-6">
+                    <div class="cards-grid habitaciones">
+                      <div class="flip-card">
+                        <div class="flip-card-inner"
+                          style="box-shadow: rgba(46, 240, 53, 0.4) 0px 5px, rgba(46, 240, 85, 0.3) 0px 10px, rgba(53, 240, 46, 0.2) 0px 15px, rgba(46, 240, 53, 0.1) 0px 20px, rgba(72, 240, 46, 0.05) 0px 25px;">
+                          <div class="flip-card-front">
+                            <strong class="text-center" id="desabilitado"> 4 </strong>
+                          </div>
+                          <div class="flip-card-back">
+                            <div class="row">
+                              <h3>Acciones</h3>
+                              <div class="col-md-12">
+                                <div class="col-md-12 text-center">
+                                  <form action="/pages/offline.html">
+                                    <button type="submit" data-mdb-toggle="tooltip" data-mdb-placement="bottom"
+                                      title="Limpiar" class="btn btn-primary btn-floating">
+                                      <i class="fa-solid fa-broom"></i>
+                                    </button>
+                                  </form>
+                                </div>
+                                <br>
+                              </div>
+                              <div class="col-md-12">
+                                <div class="col-md-12 text-center">
+                                  <button type="button" class="btn btn-success btn-floating" data-toggle="modal"
+                                    data-target="#basicExampleModal">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                  </button>
+                                </div>
+                                <br>
+                              </div>
+                              <div class="col-md-12">
+                                <div class="col-md-12 text-center">
+                                  <form action="/pages/history.html">
+                                    <button type="button" class="btn btn-info btn-floating">
+                                      <i class="fa-solid fa-clock"></i>
+                                    </button>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="row">
+                  <div class="text-center">
+                    <input type="text" name="buscador" id="buscador" placeholder="Buscar...">
+                    <h1></h1>
+                  </div>
+                  <div class="col-md-2 col-6">
+                    <div class="cards-grid habitaciones">
+                      <div class="flip-card">
+                        <div class="flip-card-inner-2" style="box-shadow: 1px 8px 10px rgba(255, 0, 0, 0.749);">
+                          <div class="flip-card-front">
+                            <strong class="text-center" id="desabilitado"> 5 </strong>
+                          </div>
+                          <div class="flip-card-back">
+                            <div class="row">
+                              <h3>Acciones</h3>
+                              <form action="/offline.html">
+                                <div class="col-md-12">
+                                  <div class="col-md-12 text-center">
+                                    <button type="submit" data-mdb-toggle="tooltip" data-mdb-placement="bottom"
+                                      title="Limpiar" class="btn btn-primary btn-floating">
+                                      <i class="fa-solid fa-broom"></i>
+                                    </button>
+                                  </div>
+                                  <br>
+                                </div>
+                                <div class="col-md-12">
+                                  <div class="col-md-12 text-center">
+                                    <button type="button" class="btn btn-success btn-floating" data-toggle="modal"
+                                      data-target="#basicExampleModal">
+                                      <i class="fa-solid fa-circle-check"></i>
+                                    </button>
+                                  </div>
+                                  <br>
+                                </div>
+                                <div class="col-md-12">
+                                  <div class="col-md-12 text-center">
+                                    <button type="button" class="btn btn-danger btn-floating">
+                                      <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                  </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2 col-6">
+                  <div class="cards-grid habitaciones">
+                    <div class="flip-card">
+                      <div class="flip-card-inner-2" style="box-shadow: 1px 8px 10px rgba(255, 0, 0, 0.749);">
+                        <div class="flip-card-front">
+                          <strong class="text-center" id="desabilitado"> 6 </strong>
+                        </div>
+                        <div class="flip-card-back">
+                          <div class="row">
+                            <h3>Acciones</h3>
+                            <div class="col-md-12">
+                              <div class="col-md-12 text-center">
+                                <button type="button" data-mdb-toggle="tooltip" data-mdb-placement="bottom"
+                                  title="Limpiar" class="btn btn-primary btn-floating">
+                                  <i class="fa-solid fa-broom"></i>
+                                </button>
+                              </div>
+                              <br>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="col-md-12 text-center">
+                                <button type="button" class="btn btn-success btn-floating">
+                                  <i class="fa-solid fa-circle-check"></i>
+                                </button>
+                              </div>
+                              <br>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="col-md-12 text-center">
+                                <button type="button" class="btn btn-danger btn-floating">
+                                  <i class="fa-solid fa-trash"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2 col-6">
+                  <div class="cards-grid habitaciones">
+                    <div class="flip-card">
+                      <div class="flip-card-inner-2" style="box-shadow: 1px 8px 10px rgba(255, 0, 0, 0.749);">
+                        <div class="flip-card-front">
+                          <strong class="text-center" id="desabilitado"> 7 </strong>
+                        </div>
+                        <div class="flip-card-back">
+                          <div class="row">
+                            <h3>Acciones</h3>
+                            <div class="col-md-12">
+                              <div class="col-md-12 text-center">
+                                <button type="button" data-mdb-toggle="tooltip" data-mdb-placement="bottom"
+                                  title="Limpiar" class="btn btn-primary btn-floating">
+                                  <i class="fa-solid fa-broom"></i>
+                                </button>
+                              </div>
+                              <br>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="col-md-12 text-center">
+                                <button type="button" class="btn btn-success btn-floating">
+                                  <i class="fa-solid fa-circle-check"></i>
+                                </button>
+                              </div>
+                              <br>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="col-md-12 text-center">
+                                <button type="button" class="btn btn-danger btn-floating">
+                                  <i class="fa-solid fa-trash"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2 col-6">
+                  <div class="cards-grid habitaciones">
+                    <div class="flip-card">
+                      <div class="flip-card-inner-2" style="box-shadow: 1px 8px 10px rgba(255, 0, 0, 0.749);">
+                        <div class="flip-card-front">
+                          <strong class="text-center" id="desabilitado"> 8 </strong>
+                        </div>
+                        <div class="flip-card-back">
+                          <div class="row">
+                            <h3>Acciones</h3>
+                            <div class="col-md-12">
+                              <div class="col-md-12 text-center">
+                                <button type="button" data-mdb-toggle="tooltip" data-mdb-placement="bottom"
+                                  title="Limpiar" class="btn btn-primary btn-floating">
+                                  <i class="fa-solid fa-broom"></i>
+                                </button>
+                              </div>
+                              <br>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="col-md-12 text-center">
+                                <button type="button" class="btn btn-success btn-floating">
+                                  <i class="fa-solid fa-circle-check"></i>
+                                </button>
+                              </div>
+                              <br>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="col-md-12 text-center">
+                                <button type="button" class="btn btn-danger btn-floating">
+                                  <i class="fa-solid fa-trash"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+              <div class="row">
+                <div class="text-center">
+                  <input type="text" name="buscador" id="buscador" placeholder="Buscar...">
+                  <h1></h1>
+                </div>
+                <div class="col-md-2 col-6">
+                  <div class="cards-grid habitaciones">
+                    <div class="flip-card">
+                      <div class="flip-card-inner"
+                        style="box-shadow: rgba(0, 34, 255, 0.4) 0px 5px, rgba(0, 34, 255, 0.3) 0px 10px, rgba(0, 34, 255, 0.2) 0px 15px, rgba(0, 34, 255, 0.1) 0px 20px, rgba(0, 34, 255, 0.05) 0px 25px;">
+                        <div class="flip-card-front">
+                          <strong class="text-center" id="desabilitado"> 9 </strong>
+                        </div>
+                        <div class="flip-card-back">
+                          <div class="row">
+                            <h3>Acciones</h3>
+                            <form action="/offline.html">
+                              <div class="col-md-12">
+                                <div class="col-md-12 text-center">
+                                  <button type="submit" data-mdb-toggle="tooltip" data-mdb-placement="bottom"
+                                    title="Limpiar" class="btn btn-primary btn-floating">
+                                    <i class="fa-solid fa-broom"></i>
+                                  </button>
+                                </div>
+                                <br>
+                              </div>
+                              <div class="col-md-12">
+                                <div class="col-md-12 text-center">
+                                  <button type="button" class="btn btn-success btn-floating" data-toggle="modal"
+                                    data-target="#basicExampleModal">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                  </button>
+                                </div>
+                                <br>
+                              </div>
+                              <div class="col-md-12">
+                                <div class="col-md-12 text-center">
+                                  <button type="button" class="btn btn-danger btn-floating">
+                                    <i class="fa-solid fa-trash"></i>
+                                  </button>
+                                </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-6">
+                <div class="cards-grid habitaciones">
+                  <div class="flip-card">
+                    <div class="flip-card-inner"
+                      style="box-shadow: rgba(0, 34, 255, 0.4) 0px 5px, rgba(0, 34, 255, 0.3) 0px 10px, rgba(0, 34, 255, 0.2) 0px 15px, rgba(0, 34, 255, 0.1) 0px 20px, rgba(0, 34, 255, 0.05) 0px 25px;">
+                      <div class="flip-card-front">
+                        <strong class="text-center" id="desabilitado"> 10 </strong>
+                      </div>
+                      <div class="flip-card-back">
+                        <div class="row">
+                          <h3>Acciones</h3>
+                          <div class="col-md-12">
+                            <div class="col-md-12 text-center">
+                              <button type="button" data-mdb-toggle="tooltip" data-mdb-placement="bottom"
+                                title="Limpiar" class="btn btn-primary btn-floating">
+                                <i class="fa-solid fa-broom"></i>
+                              </button>
+                            </div>
+                            <br>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="col-md-12 text-center">
+                              <button type="button" class="btn btn-success btn-floating">
+                                <i class="fa-solid fa-circle-check"></i>
+                              </button>
+                            </div>
+                            <br>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="col-md-12 text-center">
+                              <button type="button" class="btn btn-danger btn-floating">
+                                <i class="fa-solid fa-trash"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-6">
+                <div class="cards-grid habitaciones">
+                  <div class="flip-card">
+                    <div class="flip-card-inner"
+                      style="box-shadow: rgba(0, 34, 255, 0.4) 0px 5px, rgba(0, 34, 255, 0.3) 0px 10px, rgba(0, 34, 255, 0.2) 0px 15px, rgba(0, 34, 255, 0.1) 0px 20px, rgba(0, 34, 255, 0.05) 0px 25px;">
+                      <div class="flip-card-front">
+                        <strong class="text-center" id="desabilitado"> 11 </strong>
+                      </div>
+                      <div class="flip-card-back">
+                        <div class="row">
+                          <h3>Acciones</h3>
+                          <div class="col-md-12">
+                            <div class="col-md-12 text-center">
+                              <button type="button" data-mdb-toggle="tooltip" data-mdb-placement="bottom"
+                                title="Limpiar" class="btn btn-primary btn-floating">
+                                <i class="fa-solid fa-broom"></i>
+                              </button>
+                            </div>
+                            <br>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="col-md-12 text-center">
+                              <button type="button" class="btn btn-success btn-floating">
+                                <i class="fa-solid fa-circle-check"></i>
+                              </button>
+                            </div>
+                            <br>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="col-md-12 text-center">
+                              <button type="button" class="btn btn-danger btn-floating">
+                                <i class="fa-solid fa-trash"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-6">
+                <div class="cards-grid habitaciones">
+                  <div class="flip-card">
+                    <div class="flip-card-inner"
+                      style="box-shadow: rgba(0, 34, 255, 0.4) 0px 5px, rgba(0, 34, 255, 0.3) 0px 10px, rgba(0, 34, 255, 0.2) 0px 15px, rgba(0, 34, 255, 0.1) 0px 20px, rgba(0, 34, 255, 0.05) 0px 25px;">
+                      <div class="flip-card-front">
+                        <strong class="text-center" id="desabilitado"> 12 </strong>
+                      </div>
+                      <div class="flip-card-back">
+                        <div class="row">
+                          <h3>Acciones</h3>
+                          <div class="col-md-12">
+                            <div class="col-md-12 text-center">
+                              <button type="button" data-mdb-toggle="tooltip" data-mdb-placement="bottom"
+                                title="Limpiar" class="btn btn-primary btn-floating">
+                                <i class="fa-solid fa-broom"></i>
+                              </button>
+                            </div>
+                            <br>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="col-md-12 text-center">
+                              <button type="button" class="btn btn-success btn-floating">
+                                <i class="fa-solid fa-circle-check"></i>
+                              </button>
+                            </div>
+                            <br>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="col-md-12 text-center">
+                              <button type="button" class="btn btn-danger btn-floating">
+                                <i class="fa-solid fa-trash"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Reporte de Incidensias</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form>
+              <div class="modal-body">
+                <!-- Message input -->
+                <div class="form-outline mb-4">
+                  <textarea class="form-control" id="form4Example3" rows="4"></textarea>
+                  <label class="form-label" for="form4Example3">Comentarios</label>
+                </div>
+                <div class="file-upload">
+                  <div class="image-upload-wrap">
+                    <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+                    <div class="drag-text">
+                      <h3><img src="/img/Camera.png" style="width: 150px; height:150px;"></h3>
+                    </div>
+                  </div>
+                  <div class="file-upload-content">
+                    <img class="file-upload-image" src="#" alt="your image" />
+                    <div class="image-title-wrap">
+                      <button type="button" onclick="removeUpload()" class="remove-image">Eliminar Foto</button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Submit button -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" onClick="enviar()" class="btn btn-primary">Enviar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    //Alertas
+    function enviar() {
+      Swal.fire({
+        title: 'Estas seguro?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showDenyButton: true,
+        confirmButtonText: 'Enviar',
+        denyButtonText: `Cancelar`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          Swal.fire('Enviado exitoso!', '', 'success').then(() => {
+            location.reload();
+          })
+        } else if (result.isDenied) {
+          Swal.fire('No se hizo ningun cambio', '', 'info')
+        }
+      })
+    }
+
+    function limpiar() {
+      Swal.fire({
+        title: 'Estas seguro de querer limpiar esta habitación?',
+        icon: 'warning',
+        showDenyButton: true,
+        confirmButtonText: 'Aceptar',
+        denyButtonText: `Cancelar`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          let timerInterval
+          Swal.fire({
+            title: 'El tiempo empezara a correr!',
+            html: 'Tiempo <b></b> milliseconds.',
+            timer: 5000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading()
+              const b = Swal.getHtmlContainer().querySelector('b')
+              timerInterval = setInterval(() => {
+                b.textContent = Swal.getTimerLeft()
+              }, 100)
+            },
+            willClose: () => {
+              clearInterval(timerInterval)
+            }
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+              console.log('Terminando')
+            }
+          })
+        } else if (result.isDenied) {
+          Swal.fire('No se hizo ningun cambio', '', 'info')
+        }
+      })
+    }
+
+  </script>
+  <script src="/js/function.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="/js/app.js"></script>
+  <script type="text/javascript" src="/js/mdb.min.js"></script>
+</body>
+
+</html>
