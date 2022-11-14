@@ -1,175 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <meta name="theme_color" content="#2A4670" />
-    <title>Login</title>
-    <link rel="shortcut icon" href="img/Corona.ico" />
-    <!-- Font Awesome -->
-    <link rel="manifest" href="manifest.json" />
-    
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-    />
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <!-- Google Fonts Roboto -->
-    <!-- MDB -->
-    <link rel="stylesheet" href="css/login.css" />
-    <link rel="stylesheet" href="css/mdb.min.css" />
-  </head>
-  <body>
-    <div class="container">
-      <div class="forms-container">
-        <div class="signin-signup">
-          <form action="/pages/home.html" class="sign-in-form">
-            <h2 class="title">¡Bienvenido!</h2>
-            <span class="login100-form-logo">
-              <img
-                src="img/icono-login.png"
-                alt=""
-                style="width: 70%; height: 70%"
-              />
-            </span>
-            <div class="input-field">
-              <i class="fas fa-user"></i>
-              <input type="text" placeholder="Username" />
-            </div>
-            <div class="input-field">
-              <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Password" />
-            </div>
-            <button type="submit" id="login" class="btn btn-primary">
-              Iniciar Sesión &nbsp;<i class="fa-solid fa-paper-plane"></i>
-            </button>
-            <a href="/pages/password.html" id="sign-top-btn"
-              >Olvide mi contraseña</a
-            >
-            <div class="social-media">
-              <label for=""></label>
-            </div>
-          </form>
-          <form action="#" class="sign-up-form">
-            <h2 class="title">Registrarte!</h2>
-            <span class="login100-form-logo">
-              <img
-                src="img/icono-registro.png"
-                alt=""
-                style="width: 70%; height: 70%"
-              />
-            </span>
-            <div class="input-field">
-              <i class="fas fa-user"></i>
-              <input type="text" placeholder="Username" />
-            </div>
-            <div class="input-field">
-              <i class="fas fa-envelope"></i>
-              <input type="email" placeholder="Email" />
-            </div>
-            <div class="input-field">
-              <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Password" />
-            </div>
-            <div id="row">
-              <div>
-                <div class="wrapper">
-                  <input
-                    class="state"
-                    type="radio"
-                    name="app"
-                    id="c"
-                    value="Gerente"
-                  />
-                  <label class="label" for="c">
-                    <div class="indicator"></div>
-                    <span class="text">Gerente&nbsp;&nbsp;</span>
-                  </label>
-                </div>
-              </div>
-              <div>
-                <div class="wrapper">
-                  <input
-                    class="state"
-                    type="radio"
-                    name="app"
-                    id="d"
-                    value="Camarera"
-                  />
-                  <label class="label" for="d">
-                    <div class="indicator"></div>
-                    <span class="text">Camarera</span>
-                  </label>
-                </div>
-              </div>
-            </div>
-            <button type="submit" id="login" class="btn btn-primary">
-              Registrarme &nbsp;<i class="far fa-arrow-alt-circle-right"></i>
-            </button>
-            <div class="social-media">
-              <label for=""></label>
-            </div>
-          </form>
-        </div>
-      </div>
 
-      <div class="panels-container">
-        <div class="panel left-panel">
-          <div class="content">
-            <h3>Eres nuevo?</h3>
-            <p>
-              Registrarte aqui, Aplicación PWA para gestionar la limpieza de las
-              habitaciones en tiempo real...
-            </p>
-            <button
-              class="btn btn-rounded transparent"
-              id="sign-up-btn"
-              style="color: #fff; width: 130px"
-            >
-              Registrate
-            </button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="theme_color" content="#2A4670" />
+  <title>Login</title>
+  <link rel="shortcut icon" href="img/Corona.ico" />
+  <!-- Font Awesome -->
+  <link rel="manifest" href="manifest.json" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <!-- Google Fonts Roboto -->
+  <!-- MDB -->
+  <link rel="stylesheet" href="css/login.css" />
+  <link rel="stylesheet" href="css/mdb.min.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="forms-container">
+      <div class="signin-signup">
+        <form  name="formLogin" action="/pages/home.html" class="sign-in-form">
+          <h2 class="title">¡Bienvenido!</h2>
+          <span class="login100-form-logo">
+            <img src="img/icono-login.png" alt="" style="width: 70%; height: 70%" />
+          </span>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Username" id="emaillogin"/>
           </div>
-          <lottie-player
-            class="image"
-            src="https://assets5.lottiefiles.com/packages/lf20_ijqswcfu.json"
-            background="transparent"
-            speed="1"
-            style="width: 500px; height: 500px"
-            loop
-            autoplay
-          ></lottie-player>
-        </div>
-        <div class="panel right-panel">
-          <div class="content">
-            <h3>Ya cuentas con una?</h3>
-            <p>Inicia sesión, podrias tener algun tarea asignada...</p>
-            <button
-              class="btn btn-rounded transparent"
-              id="sign-in-btn"
-              style="color: #fff; width: 150px"
-            >
-              Iniciar&nbsp;Sesión
-            </button>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Password" id="passwordlogin"/>
           </div>
-          <lottie-player
-            class="image"
-            src="https://assets1.lottiefiles.com/packages/lf20_sg3gnsmo.json"
-            background="transparent"
-            speed="1"
-            style="width: 500px; height: 500px"
-            loop
-            autoplay
-          ></lottie-player>
-        </div>
+          <button type="button" class="btn btn-primary" onclick="login()">
+            Iniciar Sesión &nbsp;<i class="fa-solid fa-paper-plane"></i>
+          </button>
+          <a href="/pages/password.html" id="sign-top-btn">Olvide mi contraseña</a>
+          <div class="social-media">
+            <label for=""></label>
+          </div>
+        </form>
+        <form  name="formRegister" action="#" class="sign-up-form">
+          <h2 class="title">Registrarte!</h2>
+          <span class="login100-form-logo">
+            <img src="img/icono-registro.png" alt="" style="width: 70%; height: 70%" />
+          </span>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Nombre" id="name" />
+          </div>
+          <div class="input-field">
+            <i class="fas fa-envelope"></i>
+            <input type="email" placeholder="Email" id="email"/>
+          </div>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Password"  id="password"/>
+          </div>
+          <div id="row" style="display: none;">
+            <div>
+              <div class="wrapper">
+                <input class="state" type="radio" name="app" id="c" value="Gerente" />
+                <label class="label" for="c">
+                  <div class="indicator"></div>
+                  <span class="text">Gerente&nbsp;&nbsp;</span>
+                </label>
+              </div>
+            </div>
+            <div>
+              <div class="wrapper">
+                <input class="state" type="radio" name="app" id="d" value="Camarera" />
+                <label class="label" for="d">
+                  <div class="indicator"></div>
+                  <span class="text">Camarera</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <button type="button" id="login" class="btn btn-primary" onclick="Registrar()">
+            Registrarme &nbsp;<i class="far fa-arrow-alt-circle-right"></i>
+          </button>
+          <div class="social-media">
+            <label for=""></label>
+          </div>
+        </form>
       </div>
     </div>
-    <!-- MDB -->
-    <script type="text/javascript" src="js/mdb.min.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/app.js"></script>
-  </body>
+
+    <div class="panels-container">
+      <div class="panel left-panel">
+        <div class="content">
+          <h3>Eres nuevo?</h3>
+          <p>
+            Registrarte aqui, Aplicación PWA para gestionar la limpieza de las
+            habitaciones en tiempo real...
+          </p>
+          <button class="btn btn-rounded transparent" id="sign-up-btn" style="color: #fff; width: 130px">
+            Registrate
+          </button>
+        </div>
+        <lottie-player class="image" src="https://assets5.lottiefiles.com/packages/lf20_ijqswcfu.json"
+          background="transparent" speed="1" style="width: 500px; height: 500px" loop autoplay></lottie-player>
+      </div>
+      <div class="panel right-panel">
+        <div class="content">
+          <h3>Ya cuentas con una?</h3>
+          <p>Inicia sesión, podrias tener algun tarea asignada...</p>
+          <button class="btn btn-rounded transparent" id="sign-in-btn" style="color: #fff; width: 150px">
+            Iniciar&nbsp;Sesión
+          </button>
+        </div>
+        <lottie-player class="image" src="https://assets1.lottiefiles.com/packages/lf20_sg3gnsmo.json"
+          background="transparent" speed="1" style="width: 500px; height: 500px" loop autoplay></lottie-player>
+      </div>
+    </div>
+  </div>
+  <!-- MDB -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <script type="text/javascript" src="js/mdb.min.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
 </html>
