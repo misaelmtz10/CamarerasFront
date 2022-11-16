@@ -30,8 +30,8 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/index.html">
-          <i class="fa-solid fa-person-walking-arrow-right"></i>&nbsp; Cerrar Sesión</a>
+        <button class="nav-link" onclick="signOut()">
+          <i class="fa-solid fa-person-walking-arrow-right"></i>&nbsp; Cerrar Sesión</button>
       </li>
     </ul>
   </div>
@@ -62,45 +62,19 @@
           <th>&nbsp;&nbsp;<b>Estatus</b></th>
           <th>&nbsp;&nbsp; <b>Acción</b></th>
       </thead>
-      <tbody class="text-center">
-        <tr>
-          <td>Edificio 1</td>
-          <td><span id="activo" class="badge rounded-pill badge-success">Activo</span></td>
-          <td><a type="button" href="/pages/camarera.html" class="btn btn-info btn-floating">
-              <i class="fas fa-eye"></i>
-            </a></td>
-        </tr>
-        <tr>
-          <td>Edificio 2</td>
-          <td><span id="activo" class="badge rounded-pill badge-success">Activo</span></td>
-          <td><a type="button" href="/pages/camarera.html" class="btn btn-info btn-floating">
-              <i class="fas fa-eye"></i>
-            </a></td>
-        </tr>
-        <tr>
-          <td>Edificio 3</td>
-          <td><span id="activo" class="badge rounded-pill badge-success">Activo</span></td>
-          <td><a type="button" href="/pages/camarera.html" class="btn btn-info btn-floating">
-              <i class="fas fa-eye"></i>
-            </a></td>
-        </tr>
-        <tr class='noSearch hide'>
-          <td colspan="3"></td>
-        </tr>
-      </tbody>
-
+      <tbody class="text-center" id="tableBuilding"></tbody>
     </table>
-
     </p>
   </div>
 
 
   <script src="/js/app.js"></script>
+  <script src="/js/buildingController.js"></script>
+  <script src="/js/script.js"></script>
   <!-- MDB -->
   <script src="/js/edit.js"></script>
   <script type="text/javascript" src="/js/mdb.min.js"></script>
-  <script src="/js/script.js"></script>
-   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
