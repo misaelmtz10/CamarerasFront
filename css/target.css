@@ -19,6 +19,7 @@ input {
   min-height: 100vh;
   overflow: hidden;
   background-image: radial-gradient(circle at 85.36% 111.24%, #ffffff 0, #ffffff 16.67%, #ffffff 33.33%, #f1f9f9 50%, #cce1e3 66.67%, #afcfd3 83.33%, #9ac0c8 100%);
+
 }
 
 .forms-container {
