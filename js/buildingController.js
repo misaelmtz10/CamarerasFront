@@ -1,9 +1,8 @@
-let token = sessionStorage.getItem("myToken")
+let token = localStorage.getItem("myToken")
 
 window.onload = function() {
-    /*if (window.location.href.includes('edificio.html')) {
-    }*/
-    getBuildingsByUser()
+    verifySession()
+    console.log('onload');
 }
 
 let getBuildingsByUser = () =>{

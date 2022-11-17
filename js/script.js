@@ -95,7 +95,7 @@ async function login() {
             })
             const response = await request.json()
             if (response.access_token) {
-                sessionStorage.setItem("myToken", response.access_token);
+                localStorage.setItem("myToken", response.access_token);
                 setTimeout(function () { window.location.href = "http://localhost:8080/pages/edificio.html"; }, 500);
             } else {
                 swal({
@@ -113,7 +113,7 @@ async function login() {
 }
 
 async function signOut (){
-    let token = sessionStorage.getItem("myToken")
+    let token = localStorage.getItem("myToken")
     const request = await fetch('http://127.0.0.1:8000/api/logout', {
         method: 'GET',
         headers: {
@@ -132,6 +132,6 @@ async function signOut (){
             button: "Ok",
         });
     }
-    sessionStorage.removeItem("myToken")
+    localStorage.removeItem("myToken")
     setTimeout(function () { window.location.href = "http://localhost:8080/"; }, 500);
 }

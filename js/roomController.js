@@ -1,9 +1,7 @@
-let token = sessionStorage.getItem("myToken")
+let token = localStorage.getItem("myToken")
 
 window.onload = function() {
-    const params = new URLSearchParams(document.location.search);
-    const id = params.get("id");
-    getRoomsByUser(id)
+    verifySession()
 }
 
 let getRoomsByUser = (id) =>{
@@ -16,13 +14,11 @@ let getRoomsByUser = (id) =>{
     },
 }).then(response => response.json())
     .then(data => {
-        console.log(data);
         let content = ``;
 
         // Loop to access all rows
         for (let item of data.data) {
             content += ` 
-            
                 <div class="cards-grid habitaciones">
                     <div class="flip-card">
                         <div class="flip-card-inner"
@@ -65,11 +61,10 @@ let getRoomsByUser = (id) =>{
                         </div>
                     </div>
                 </div>
-           
             `;
-
         }
-        // Setting innerHTML as tab variable
+        // Setting innerHTML as content
+         variable
         document.getElementById("cardRoom").innerHTML = content;
     })
 }
