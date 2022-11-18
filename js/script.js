@@ -95,8 +95,8 @@ async function login() {
             })
             const response = await request.json()
             if (response.access_token) {
-                localStorage.setItem("myToken", response.access_token);
-                setTimeout(function () { window.location.href = "http://localhost:8080/pages/edificio.html"; }, 500);
+                localStorage.setItem("myToken", response.access_token)
+                redirectLikeRole()
             } else {
                 swal({
                     title: "Error!",
@@ -110,6 +110,24 @@ async function login() {
         alert(error);
     }
 
+}
+
+let redirectLikeRole = async () =>{
+    let token = localStorage.getItem("myToken")
+    const request = await fetch('http://127.0.0.1:8000/api/userProfile', {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + token,
+        },
+    })
+    response = await request.json()
+    if (response.data.role_id) {
+        setTimeout(function () { window.location.href = "http://localhost:8080/pages/edificio.html"; }, 500)
+    } else {
+        //aquí va la vista del admin
+    }
 }
 
 async function signOut (){

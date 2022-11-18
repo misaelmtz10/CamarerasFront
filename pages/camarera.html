@@ -643,44 +643,6 @@
       })
     }
 
-    function limpiar() {
-      Swal.fire({
-        title: 'Estas seguro de querer limpiar esta habitación?',
-        icon: 'warning',
-        showDenyButton: true,
-        confirmButtonText: 'Aceptar',
-        denyButtonText: `Cancelar`,
-      }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-          let timerInterval
-          Swal.fire({
-            title: 'El tiempo empezara a correr!',
-            html: 'Tiempo <b></b> milliseconds.',
-            timer: 5000,
-            timerProgressBar: true,
-            didOpen: () => {
-              Swal.showLoading()
-              const b = Swal.getHtmlContainer().querySelector('b')
-              timerInterval = setInterval(() => {
-                b.textContent = Swal.getTimerLeft()
-              }, 100)
-            },
-            willClose: () => {
-              clearInterval(timerInterval)
-            }
-          }).then((result) => {
-            /* Read more about handling dismissals below */
-            if (result.dismiss === Swal.DismissReason.timer) {
-              console.log('Terminando')
-            }
-          })
-        } else if (result.isDenied) {
-          Swal.fire('No se hizo ningun cambio', '', 'info')
-        }
-      })
-    }
-
   </script>
   <script src="/js/verifySession.js"></script>
   <script src="/js/function.js"></script>
