@@ -4,15 +4,15 @@ window.onload = function () {
     verifySession()
 }
 
-let getRoomsByUser = (id) => {
-    fetch('http://127.0.0.1:8000/api/room/getAllByUser/' + id, {
-        method: 'GET',
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: "Bearer " + token,
-        },
-    }).then(response => response.json())
+let getRoomsByUserByStatusAssigned = (idBuilding, idStatus) => {
+    fetch(`http://127.0.0.1:8000/api/room/getAllByUser/${idBuilding}/${idStatus}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: "Bearer " + token,
+            },
+        }).then(response => response.json())
         .then(data => {
             let content = ``;
             console.log(data.data);
@@ -64,7 +64,144 @@ let getRoomsByUser = (id) => {
             `;
             }
             // Setting innerHTML as content variable
-            document.getElementById("cardRoom").innerHTML = content;
+            document.getElementById("card-rooms-with-status-assigned").innerHTML = content;
+        })
+}
+
+let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
+    fetch(`http://127.0.0.1:8000/api/room/getAllByUser/${idBuilding}/${idStatus}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: "Bearer " + token,
+            },
+        }).then(response => response.json())
+        .then(data => {
+            let content = ``;
+            console.log(data.data);
+
+            for (let item of data.data) {
+                content += ` 
+                <div class="cards-grid habitaciones">
+                    <div class="flip-card">
+                      <div class="flip-card-inner-2" style="box-shadow: 1px 8px 10px rgba(255, 0, 0, 0.749);">
+                        <div class="flip-card-front">
+                          <strong class="text-center" id="desabilitado">${item.number}</strong>
+                        </div>
+                        <div class="flip-card-back">
+                          <div class="row">
+                            <h3>Acciones</h3>
+                            <div class="col-md-12">
+                              <div class="col-md-12 text-center">
+                                <button type="button" data-mdb-toggle="tooltip" data-mdb-placement="bottom" title="Limpiar" class="btn btn-primary btn-floating">
+                                  <i class="fa-solid fa-broom"></i>
+                                </button>
+                              </div>
+                              <br>
+                            </div>
+                            <div class="col-md-12">
+                            <div class="col-md-12 text-center">
+                                <button type="button" data-mdb-toggle="tooltip" data-mdb-placement="bottom"
+                                    title="Limpiar" onClick="limpiar(${item.id})" class="btn btn-primary btn-floating">
+                                    <i class="fa-solid fa-broom"></i>
+                                </button>
+                            </div>
+                              <br>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-12 text-center">
+                                    <button type="button" class="btn btn-success btn-floating" data-toggle="modal" id="open-incidence"
+                                        data-target="#basicExampleModal" onClick="openModal(${item.id})">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <br>
+                                </div>
+                                <div class="col-md-12">
+                                <div class="col-md-12 text-center">
+                                    <form action="/pages/history.html">
+                                    <button type="submit" class="btn btn-info btn-floating">
+                                        <i class="fa-solid fa-clock"></i>
+                                    </button>
+                                    </form>
+                                </div>
+                                </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+ 
+            `;
+            }
+            // Setting innerHTML as content variable
+            document.getElementById("card-rooms-with-status-blocked").innerHTML = content;
+        })
+}
+
+let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
+    fetch(`http://127.0.0.1:8000/api/room/getAllByUser/${idBuilding}/${idStatus}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: "Bearer " + token,
+            },
+        }).then(response => response.json())
+        .then(data => {
+            let content = ``;
+            console.log(data.data);
+
+            for (let item of data.data) {
+                content += ` 
+                <div class="cards-grid habitaciones">
+                    <div class="flip-card">
+                        <div class="flip-card-inner"
+                            style="box-shadow: rgba(0, 255, 8, 0.4) 0px 5px, rgba(1, 246, 50, 0.3) 0px 10px, rgba(9, 244, 0, 0.2) 0px 15px, rgba(0, 240, 8, 0.1) 0px 20px, rgba(31, 236, 0, 0.05) 0px 25px;">
+                            <div class="flip-card-front">
+                            <strong class="text-center" id="desabilitado"> ${item.number} </strong>
+                            </div>
+                            <div class="flip-card-back">
+                            <div class="row">
+                                <h6>Acciones</h6>
+                                <div class="col-md-12">
+                                <div class="col-md-12 text-center">
+                                    <button type="button" data-mdb-toggle="tooltip" data-mdb-placement="bottom"
+                                        title="Limpiar" onClick="limpiar(${item.id})" class="btn btn-primary btn-floating">
+                                        <i class="fa-solid fa-broom"></i>
+                                    </button>
+                                </div>
+                                <br>
+                                </div>
+                                <div class="col-md-12">
+                                <div class="col-md-12 text-center">
+                                    <button type="button" class="btn btn-success btn-floating" data-toggle="modal" id="open-incidence"
+                                        data-target="#basicExampleModal" onClick="openModal(${item.id})">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                    </button>
+                                </div>
+                                <br>
+                                </div>
+                                <div class="col-md-12">
+                                <div class="col-md-12 text-center">
+                                    <form action="/pages/history.html">
+                                    <button type="submit" class="btn btn-info btn-floating">
+                                        <i class="fa-solid fa-clock"></i>
+                                    </button>
+                                    </form>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            }
+            // Setting innerHTML as content variable
+            document.getElementById("card-rooms-with-status-released").innerHTML = content;
         })
 }
 
