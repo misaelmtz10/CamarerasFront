@@ -579,7 +579,7 @@
       </div>
       <!-- Modal -->
       <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+        aria-hidden="true" data-obj="obj">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -592,8 +592,8 @@
               <div class="modal-body">
                 <!-- Message input -->
                 <div class="form-outline mb-4">
-                  <textarea class="form-control" id="form4Example3" rows="4"></textarea>
-                  <label class="form-label" for="form4Example3">Comentarios</label>
+                  <textarea class="form-control" id="observationsIn" rows="4"></textarea>
+                  <label class="form-label" for="observationsIn">Comentarios</label>
                 </div>
                 <div class="file-upload">
                   <div class="image-upload-wrap">
@@ -612,7 +612,7 @@
                 <!-- Submit button -->
               </div>
               <div class="modal-footer">
-                <button type="button" onClick="enviar()" class="btn btn-primary">Enviar</button>
+                <button type="button" id="send-incidences" class="btn btn-primary">Enviar</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
               </div>
             </form>
@@ -621,29 +621,6 @@
       </div>
     </div>
   </div>
-  <script>
-    //Alertas
-    function enviar() {
-      Swal.fire({
-        title: 'Estas seguro?',
-        text: "¡No podrás revertir esto!",
-        icon: 'warning',
-        showDenyButton: true,
-        confirmButtonText: 'Enviar',
-        denyButtonText: `Cancelar`,
-      }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-          Swal.fire('Enviado exitoso!', '', 'success').then(() => {
-            location.reload();
-          })
-        } else if (result.isDenied) {
-          Swal.fire('No se hizo ningun cambio', '', 'info')
-        }
-      })
-    }
-
-  </script>
   <script src="/js/verifySession.js"></script>
   <script src="/js/function.js"></script>
   <script src="/js/roomController.js"></script>

@@ -6,17 +6,17 @@ window.onload = function () {
 
 let getRoomsByUser = (id) => {
     fetch('http://127.0.0.1:8000/api/room/getAllByUser/' + id, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                Authorization: "Bearer " + token,
-            },
-        }).then(response => response.json())
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + token,
+        },
+    }).then(response => response.json())
         .then(data => {
             let content = ``;
             console.log(data.data);
-            // Loop to access all rows
+
             for (let item of data.data) {
                 content += ` 
                 <div class="cards-grid habitaciones">
@@ -28,21 +28,21 @@ let getRoomsByUser = (id) => {
                             </div>
                             <div class="flip-card-back">
                             <div class="row">
-                                <h3>Acciones</h3>
+                                <h6>Acciones</h6>
                                 <div class="col-md-12">
                                 <div class="col-md-12 text-center">
                                     <button type="button" data-mdb-toggle="tooltip" data-mdb-placement="bottom"
-                                    title="Limpiar" onClick="limpiar(${2})" class="btn btn-primary btn-floating">
-                                    <i class="fa-solid fa-broom"></i>
+                                        title="Limpiar" onClick="limpiar(${item.id})" class="btn btn-primary btn-floating">
+                                        <i class="fa-solid fa-broom"></i>
                                     </button>
                                 </div>
                                 <br>
                                 </div>
                                 <div class="col-md-12">
                                 <div class="col-md-12 text-center">
-                                    <button type="button" class="btn btn-success btn-floating" data-toggle="modal"
-                                    data-target="#basicExampleModal">
-                                    <i class="fa-solid fa-circle-check"></i>
+                                    <button type="button" class="btn btn-success btn-floating" data-toggle="modal" id="open-incidence"
+                                        data-target="#basicExampleModal" onClick="openModal(${item.id})">
+                                        <i class="fa-solid fa-circle-check"></i>
                                     </button>
                                 </div>
                                 <br>
@@ -68,22 +68,85 @@ let getRoomsByUser = (id) => {
         })
 }
 
+//Alertas
+let openModal = (id) => {
+    let btnSend = document.querySelector("#send-incidences")
+    const date = Date.now()
+    const today = new Date(date)
+    let observationsIn = document.getElementById('observationsIn').value
+    let evidenceIn = document.getElementById('evidenceIn')
+
+    let data = {
+        ended: today.toISOString(),
+        observations: observationsIn,
+        //evidence: evidenceIn,
+        status_cleaning_id: 4
+    }
+    btnSend.addEventListener("click", () => {
+        if (observationsIn != null) {
+            Swal.fire({
+                title: 'Estas seguro?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showDenyButton: true,
+                confirmButtonColor: "#1266F1",
+                confirmButtonText: 'Enviar',
+                denyButtonText: `Cancelar`,
+            }).then((result) => {
+
+                if (result.isConfirmed) {
+                    const resultRequest = setIncidence(id, data).then((data) => {
+                        if (data.data) {
+                            Swal.fire('¡Envío éxitoso!', '', 'success')
+                            $('#basicExampleModal').modal('hide')
+                        } else {
+                            Swal.fire('¡Algo ocurrió, intenta de nuevo!', '', 'error')
+                        }
+
+                    }).catch((error) => {
+                        console.log(error);
+                    })
+                } else if (result.isDenied) {
+                    Swal.fire('No se hizo ningun cambio', '', 'info')
+                }
+            })
+        } else {
+            Swal.fire('Debes llenar el campo de comentarios', '', 'info')
+        }
+    })
+}
+
+let setIncidence = async (id, data) => {
+
+    const request = await fetch('http://127.0.0.1:8000/api/room/updateRoom/' + id, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(data)
+    })
+    return response = await request.json()
+}
+
+
 let limpiar = (id) => {
     Swal.fire({
-        title: 'Estas seguro de querer limpiar esta habitación?',
+        title: '¿Estás seguro de querer limpiar esta habitación?',
         icon: 'warning',
         showDenyButton: true,
+        confirmButtonColor: "#1266F1",
         confirmButtonText: 'Aceptar',
+        cancelButtonColor: "#DD6B55",
         denyButtonText: `Cancelar`,
     }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
             let timerInterval
-            let resultRequest = changeStatusRoom(id)
+
             Swal.fire({
-                title: 'El tiempo empezara a correr!',
+                title: 'Empezando limpieza...',
                 html: 'Tiempo <b></b> milliseconds.',
-                timer: 5000,
+                timer: 2000,
                 timerProgressBar: true,
                 didOpen: () => {
                     Swal.showLoading()
@@ -96,14 +159,16 @@ let limpiar = (id) => {
                     clearInterval(timerInterval)
                 }
             }).then((result) => {
-                /* Read more about handling dismissals below */
                 if (result.dismiss === Swal.DismissReason.timer) {
-                    if (resultRequest.data) {
-                        console.log('Se realizó el cambio')
-                    } else {
-                        console.log('No realizó el cambio')
-                        
-                    }
+                    const resultRequest = changeStatusRoom(id).then((data) => {
+                        if (data.data) {
+                            Swal.fire('¡Envío éxitoso!', '', 'success')
+                        } else {
+                            Swal.fire('¡Algo ocurrió, intenta de nuevo!', '', 'error')
+                        }
+                    }).catch((error) => {
+                        console.log(error);
+                    })
                 }
             })
         } else if (result.isDenied) {
@@ -112,16 +177,17 @@ let limpiar = (id) => {
     })
 }
 
-let changeStatusRoom = async (id) =>{
+let changeStatusRoom = async (id) => {
+    const date = Date.now()
+    const today = new Date(date)
     let data = {
-        started: new Date(),
-        users_id:2
+        started: today.toISOString()
     }
-
-    const request = await fetch('http://localhost:8000/api/room/updateRoom/' + id, {//localhost:8000/api/room/updateRoom/3
+    const request = await fetch('http://127.0.0.1:8000/api/room/updateRoom/' + id, {
         method: 'PUT',
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
         },
         body: JSON.stringify(data)
     })
