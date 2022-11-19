@@ -18,7 +18,7 @@ let verifySession = async () => {
             const id = params.get("id")
             getRoomsByUserByStatusAssigned(id, 2)
             getRoomsByUserByStatusBlocked(id, 4)
-            //getRoomsByUserByStatusReleased(id, 3)
+            getRoomsByUserByStatusReleased(id, 3)
         }else if (path.includes('registerCamarera.html')) {
             //aquí van las acciones para admin
         }else{
