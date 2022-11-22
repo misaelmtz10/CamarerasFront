@@ -235,6 +235,11 @@ let openModal = (id) => {
                         if (data.data) {
                             Swal.fire('¡Envío éxitoso!', '', 'success')
                             $('#basicExampleModal').modal('hide')
+                            const params = new URLSearchParams(document.location.search)
+                            const id = params.get("id")
+                            getRoomsByUserByStatusBlocked(id, 4)
+                            getRoomsByUserByStatusAssigned(id, 2)
+                            getRoomsByUserByStatusReleased(id, 3)
                         } else {
                             Swal.fire('¡Algo ocurrió, intenta de nuevo!', '', 'error')
                         }
