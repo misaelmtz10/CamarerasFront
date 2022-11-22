@@ -1,4 +1,28 @@
 let token = localStorage.getItem("myToken")
+const btnCamera = document.getElementById("btnCamera")
+const btnTakePhoto = document.getElementById("btnTakePhoto")
+
+const video = document.getElementById("video")
+const photo = document.getElementById("photo")
+const contentCarousel = document.getElementById("contentCarousel")
+let arrayPhoto = []
+const camera = new Camera(video)
+
+btnCamera.addEventListener("click",()=>{
+    console.log("abrir camera")
+    camera.power();
+})
+
+btnTakePhoto.addEventListener("click",()=>{
+    console.log("toma foto")
+    let picture = camera.takePhoto()
+    console.log(picture) 
+    camera.off();
+    photo.setAttribute('src',picture)
+    arrayPhoto.push(picture)
+    //printCarousel(arrayPhoto)
+    
+})
 
 window.onload = function () {
     verifySession()
@@ -238,8 +262,8 @@ let openModal = (id) => {
                             const params = new URLSearchParams(document.location.search)
                             const id = params.get("id")
                             getRoomsByUserByStatusBlocked(id, 4)
-                            getRoomsByUserByStatusAssigned(id, 2)
-                            getRoomsByUserByStatusReleased(id, 3)
+                            getRoomsByUserByStatusAssigned(id, 1)
+                            getRoomsByUserByStatusReleased(id, 2)
                         } else {
                             Swal.fire('¡Algo ocurrió, intenta de nuevo!', '', 'error')
                         }

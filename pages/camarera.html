@@ -117,7 +117,7 @@
       <!-- Modal -->
       <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true" data-obj="obj">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-fullscreen" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Reporte de Incidencias</h5>
@@ -132,7 +132,7 @@
                   <textarea class="form-control" id="observationsIn" rows="4"></textarea>
                   <label class="form-label" for="observationsIn">Comentarios</label>
                 </div>
-                <div class="file-upload">
+                <!--<div class="file-upload">
                   <div class="image-upload-wrap">
                     <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
                     <div class="drag-text">
@@ -145,7 +145,27 @@
                       <button type="button" onclick="removeUpload()" class="remove-image">Eliminar Foto</button>
                     </div>
                   </div>
+                </div>-->
+                <div class="row">
+                  <div class="col-12 d-grid gap-2 mb-2">
+                     <button id="btnCamera" class="btn btn-success">Abrir camara</button>
+                  </div>
                 </div>
+                <div class="row">
+                    <div class="col-12 text-center"> 
+                        <video id="video" class="img-thumbnail" autoplay style="height:350px; width:90%"></video>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 d-grid gap-2">
+                        <button id="btnTakePhoto" class="btn btn-primary">Capturar</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <img id="photo" src="" class="img-thumbnail" alt="">    
+                    </div>
+                </div> 
                 <!-- Submit button -->
               </div>
               <div class="modal-footer">
@@ -160,6 +180,7 @@
   </div>
   <script src="/js/verifySession.js"></script>
   <script src="/js/function.js"></script>
+  <script src="/js/camera.js"></script>
   <script src="/js/roomController.js"></script>
   <script src="/js/script.js"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
