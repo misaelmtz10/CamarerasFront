@@ -1,10 +1,12 @@
+import { saveBase64Fire } from '/js/firestore-functions.js';
+
 let token = localStorage.getItem("myToken")
 const btnCamera = document.getElementById("btnCamera")
 const btnTakePhoto = document.getElementById("btnTakePhoto")
 
 const video = document.getElementById("video")
 const photo = document.getElementById("photo")
-const contentCarousel = document.getElementById("contentCarousel")
+
 let arrayPhoto = []
 const camera = new Camera(video)
 
@@ -26,6 +28,38 @@ btnTakePhoto.addEventListener("click",()=>{
 
 window.onload = function () {
     verifySession()
+}
+
+let verifySession = async () => {
+    const request = await fetch('http://127.0.0.1:8000/api/userProfile', {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + token,
+        },
+    })
+    let dataUser = await request.json()
+    let path = window.location.href
+    console.log(dataUser);
+
+    if (token && dataUser.data) {
+        if (path.includes('edificio.html')) {
+            getBuildingsByUser()
+        }else if (path.includes('camarera.html')) {
+            const params = new URLSearchParams(document.location.search)
+            const id = params.get("id")
+            getRoomsByUserByStatusAssigned(id, 1)
+            getRoomsByUserByStatusBlocked(id, 4)
+            getRoomsByUserByStatusReleased(id, 2)
+        }else if (path.includes('registerCamarera.html')) {
+            //aquí van las acciones para admin
+        }else{
+            window.location.href = "http://localhost:8080/"
+        }
+    }else{
+        window.location.href = "http://localhost:8080/"
+    }
 }
 
 let getRoomsByUserByStatusAssigned = (idBuilding, idStatus) => {
@@ -127,7 +161,7 @@ let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
                             <div class="col-md-12">
                             <div class="col-md-12 text-center">
                                 <button type="button" data-mdb-toggle="tooltip" data-mdb-placement="bottom"
-                                    title="Limpiar" onClick="limpiar(${item.id})" class="btn btn-primary btn-floating">
+                                    title="Limpiar" onClick="'limpiar(${item.id})'" class="btn btn-primary btn-floating">
                                     <i class="fa-solid fa-broom"></i>
                                 </button>
                             </div>
@@ -136,7 +170,7 @@ let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
                             <div class="col-md-12">
                                 <div class="col-md-12 text-center">
                                     <button type="button" class="btn btn-success btn-floating" data-toggle="modal" id="open-incidence"
-                                        data-target="#basicExampleModal" onClick="openModal(${item.id})">
+                                        data-target="#basicExampleModal" onClick="'openModal(${item.id})'">
                                         <i class="fa-solid fa-circle-check"></i>
                                     </button>
                                 </div>
@@ -192,7 +226,7 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
                           <div class="col-md-12">
                             <div class="col-md-12 text-center">
                                 <button type="button" data-mdb-toggle="tooltip" data-mdb-placement="bottom"
-                                title="Limpiar" onClick="limpiar(${item.id})" class="btn btn-primary btn-floating">
+                                title="Limpiar" onClick="'limpiar(${item.id})'" class="btn btn-primary btn-floating">
                                 <i class="fa-solid fa-broom"></i>
                                 </button>
                             </div>
@@ -201,7 +235,7 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
                           <div class="col-md-12">
                             <div class="col-md-12 text-center">
                                 <button type="button" class="btn btn-success btn-floating" data-toggle="modal" id="open-incidence"
-                                    data-target="#basicExampleModal" onClick="openModal(${item.id})">
+                                    data-target="#basicExampleModal" onClick="'openModal(${item.id})'">
                                     <i class="fa-solid fa-circle-check"></i>
                                 </button>
                             </div>
@@ -229,6 +263,7 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
 }
 
 //Alertas
+
 let openModal = (id) => {
     let btnSend = document.querySelector("#send-incidences")
     const date = Date.now()
@@ -239,11 +274,13 @@ let openModal = (id) => {
     let data = {
         ended: today.toISOString(),
         observations: observationsIn,
-        //evidence: evidenceIn,
+        //evidence: arrayPhoto,
         status_cleaning_id: 4
     }
+    console.log(observationsIn);
+    console.log(arrayPhoto);
     btnSend.addEventListener("click", () => {
-        if (observationsIn != null) {
+        if (observationsIn != null && arrayPhoto != null) {
             Swal.fire({
                 title: 'Estas seguro?',
                 text: "¡No podrás revertir esto!",
@@ -255,6 +292,8 @@ let openModal = (id) => {
             }).then((result) => {
 
                 if (result.isConfirmed) {
+                    //aquí haremos el envio a firebase
+                    putPhoto(arrayPhoto)
                     const resultRequest = setIncidence(id, data).then((data) => {
                         if (data.data) {
                             Swal.fire('¡Envío éxitoso!', '', 'success')
@@ -276,9 +315,14 @@ let openModal = (id) => {
                 }
             })
         } else {
-            Swal.fire('Debes llenar el campo de comentarios', '', 'info')
+            Swal.fire('Debes llenar los campos', '', 'info')
         }
     })
+}
+
+let putPhoto = async (base64) =>{
+    const result = await saveBase64Fire(base64)
+    console.log(result);
 }
 
 let setIncidence = async (id, data) => {

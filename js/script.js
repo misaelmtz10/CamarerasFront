@@ -123,8 +123,8 @@ let redirectLikeRole = async () =>{
         },
     })
     response = await request.json()
-    if (response.data.role_id) {
-        setTimeout(function () { window.location.href = "http://localhost:8080/pages/edificio.html"; }, 500)
+    if (response.data.role_id === 2) {
+        setTimeout(function () { window.location.href = "http://localhost:8080/pages/edificio.html"; }, 200)
     } else {
         //aquí va la vista del admin
     }
