@@ -255,6 +255,8 @@ let openModal = (id) => {
             }).then((result) => {
 
                 if (result.isConfirmed) {
+                    
+                    //const resultFirebase = saveImageFirebase(arrayPhoto)
                     const resultRequest = setIncidence(id, data).then((data) => {
                         if (data.data) {
                             Swal.fire('¡Envío éxitoso!', '', 'success')
