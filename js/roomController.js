@@ -231,19 +231,19 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
 //Alertas
 let openModal = (id) => {
     let btnSend = document.querySelector("#send-incidences")
-    const date = Date.now()
-    const today = new Date(date)
-    let observationsIn = document.getElementById('observationsIn').value
-    let evidenceIn = document.getElementById('evidenceIn')
-
-    let data = {
-        ended: today.toISOString(),
-        observations: observationsIn,
-        //evidence: evidenceIn,
-        status_cleaning_id: 4
-    }
     btnSend.addEventListener("click", () => {
-        if (observationsIn != null) {
+        const date = Date.now()
+        const today = new Date(date)
+        let observationsIn = document.getElementById('observationsIn').value
+        //let evidenceIn = document.getElementById('evidenceIn')
+        console.log('observations'+ observationsIn);
+        let data = {
+            ended: today.toISOString(),
+            observations: observationsIn,
+            evidence: arrayPhoto,
+            status_cleaning_id: 4
+        }
+        if (observationsIn) {
             Swal.fire({
                 title: 'Estas seguro?',
                 text: "¡No podrás revertir esto!",
@@ -330,6 +330,11 @@ let limpiar = (id) => {
                     const resultRequest = changeStatusRoom(id).then((data) => {
                         if (data.data) {
                             Swal.fire('¡Envío éxitoso!', '', 'success')
+                            const params = new URLSearchParams(document.location.search)
+                            const id = params.get("id")
+                            getRoomsByUserByStatusBlocked(id, 4)
+                            getRoomsByUserByStatusAssigned(id, 1)
+                            getRoomsByUserByStatusReleased(id, 2)
                         } else {
                             Swal.fire('¡Algo ocurrió, intenta de nuevo!', '', 'error')
                         }
@@ -348,7 +353,9 @@ let changeStatusRoom = async (id) => {
     const date = Date.now()
     const today = new Date(date)
     let data = {
-        started: today.toISOString()
+        started: today.toISOString(),
+        ended: today.toISOString(),
+        status_cleaning_id: 2
     }
     const request = await fetch('http://127.0.0.1:8000/api/room/updateRoom/' + id, {
         method: 'PUT',
