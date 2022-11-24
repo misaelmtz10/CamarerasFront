@@ -103,7 +103,6 @@ let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
         }).then(response => response.json())
         .then(data => {
             let content = ``;
-            console.log(data.data);
 
             for (let item of data.data) {
                 content += ` 
@@ -176,7 +175,6 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
         }).then(response => response.json())
         .then(data => {
             let content = ``;
-            console.log(data.data);
 
             for (let item of data.data) {
                 content += ` 
