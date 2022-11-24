@@ -14,6 +14,7 @@ btnCamera.addEventListener("click",()=>{
 })
 
 btnTakePhoto.addEventListener("click",()=>{
+    document.querySelector("#video").setAttribute("style", "display: none;");
     console.log("toma foto")
     let picture = camera.takePhoto()
     console.log(picture) 
@@ -179,7 +180,7 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
             for (let item of data.data) {
                 content += ` 
                 <div class="cards-grid habitaciones">
-                  <div class="flip-card">
+                  <div class="">
                     <div class="flip-card-inner" style="box-shadow: rgba(0, 34, 255, 0.4) 0px 5px, rgba(0, 34, 255, 0.3) 0px 10px, rgba(0, 34, 255, 0.2) 0px 15px, rgba(0, 34, 255, 0.1) 0px 20px, rgba(0, 34, 255, 0.05) 0px 25px;">
                       <div class="flip-card-front">
                         <strong class="text-center" id="desabilitado"> ${item.number}</strong>
