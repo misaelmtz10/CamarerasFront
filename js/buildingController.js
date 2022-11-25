@@ -1,12 +1,11 @@
 let token = localStorage.getItem("myToken")
-
 window.onload = function () {
     verifySession()
     console.log('onload');
 }
 
 let getBuildingsByUser = () => {
-    fetch('http://127.0.0.1:8000/api/building/getAllBelongUser', {
+    fetch(`http://${host}:8000/api/building/getAllBelongUser`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json",

@@ -4,25 +4,19 @@ const btnTakePhoto = document.getElementById("btnTakePhoto")
 
 const video = document.getElementById("video")
 const photo = document.getElementById("photo")
-const contentCarousel = document.getElementById("contentCarousel")
 let arrayPhoto = []
 const camera = new Camera(video)
 
 btnCamera.addEventListener("click",()=>{
-    console.log("abrir camera")
     camera.power();
 })
 
 btnTakePhoto.addEventListener("click",()=>{
     document.querySelector("#video").setAttribute("style", "display: none;");
-    console.log("toma foto")
     let picture = camera.takePhoto()
-    console.log(picture) 
     camera.off();
     photo.setAttribute('src',picture)
     arrayPhoto.push(picture)
-    //printCarousel(arrayPhoto)
-    
 })
 
 window.onload = function () {
@@ -30,7 +24,7 @@ window.onload = function () {
 }
 
 let getRoomsByUserByStatusAssigned = (idBuilding, idStatus) => {
-    fetch(`http://127.0.0.1:8000/api/room/getAllByUser/${idBuilding}/${idStatus}`, {
+    fetch(`http://${host}:8000/api/room/getAllByUser/${idBuilding}/${idStatus}`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -94,7 +88,7 @@ let getRoomsByUserByStatusAssigned = (idBuilding, idStatus) => {
 }
 
 let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
-    fetch(`http://127.0.0.1:8000/api/room/getAllByUser/${idBuilding}/${idStatus}`, {
+    fetch(`http://${host}:8000/api/room/getAllByUser/${idBuilding}/${idStatus}`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -164,9 +158,11 @@ let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
             document.getElementById("card-rooms-with-status-blocked").innerHTML = content;
         })
 }
+let listRooms = []
 
 let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
-    fetch(`http://127.0.0.1:8000/api/room/getAllByUser/${idBuilding}/${idStatus}`, {
+
+    fetch(`http://${host}:8000/api/room/getAllByUser/${idBuilding}/${idStatus}`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -176,11 +172,11 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
         }).then(response => response.json())
         .then(data => {
             let content = ``;
-
+            listRooms = data.data
             for (let item of data.data) {
                 content += ` 
                 <div class="cards-grid habitaciones">
-                  <div class="">
+                  <div class="flip-card">
                     <div class="flip-card-inner" style="box-shadow: rgba(0, 34, 255, 0.4) 0px 5px, rgba(0, 34, 255, 0.3) 0px 10px, rgba(0, 34, 255, 0.2) 0px 15px, rgba(0, 34, 255, 0.1) 0px 20px, rgba(0, 34, 255, 0.05) 0px 25px;">
                       <div class="flip-card-front">
                         <strong class="text-center" id="desabilitado"> ${item.number}</strong>
@@ -190,17 +186,8 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
                           <h3>Acciones</h3>
                           <div class="col-md-12">
                             <div class="col-md-12 text-center">
-                                <button type="button" data-mdb-toggle="tooltip" data-mdb-placement="bottom"
-                                title="Limpiar" onClick="limpiar(${item.id})" class="btn btn-primary btn-floating">
-                                <i class="fa-solid fa-broom"></i>
-                                </button>
-                            </div>
-                            <br>
-                          </div>
-                          <div class="col-md-12">
-                            <div class="col-md-12 text-center">
                                 <button type="button" class="btn btn-success btn-floating" data-toggle="modal" id="open-incidence"
-                                    data-target="#basicExampleModal" onClick="openModal(${item.id})">
+                                    data-target="#basicExampleModal" onClick="showDetails(${item.id})">
                                     <i class="fa-solid fa-circle-check"></i>
                                 </button>
                             </div>
@@ -282,9 +269,20 @@ let openModal = (id) => {
     })
 }
 
+let showDetails = (params) =>{
+    let room = JSON.stringify(listRooms.find(it => it.id === params))
+    let roomJSON = JSON.parse(room)
+    console.log(arrayPhoto);
+    console.log(roomJSON.evidence);
+    console.log(roomJSON);
+    let observationsIn = document.getElementById('observationsIn')
+    observationsIn.value = roomJSON.observations
+    photo.setAttribute('src',roomJSON.evidence)
+}
+
 let setIncidence = async (id, data) => {
 
-    const request = await fetch('http://127.0.0.1:8000/api/room/updateRoom/' + id, {
+    const request = await fetch(`http://${host}:8000/api/room/updateRoom/${id}`, {
         method: 'PUT',
         headers: {
             "Content-Type": "application/json",
@@ -356,7 +354,7 @@ let changeStatusRoom = async (id) => {
         ended: today.toISOString(),
         status_cleaning_id: 2
     }
-    const request = await fetch('http://127.0.0.1:8000/api/room/updateRoom/' + id, {
+    const request = await fetch(`http://${host}:8000/api/room/updateRoom/${id}`, {
         method: 'PUT',
         headers: {
             "Content-Type": "application/json",

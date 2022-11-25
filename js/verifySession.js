@@ -1,5 +1,5 @@
 let verifySession = async () => {
-    const request = await fetch('http://127.0.0.1:8000/api/userProfile', {
+    const request = await fetch(`http://${host}:8000/api/userProfile`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json",
