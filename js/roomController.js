@@ -5,6 +5,7 @@ const btnTakePhoto = document.getElementById("btnTakePhoto")
 const video = document.getElementById("video")
 const photo = document.getElementById("photo")
 let arrayPhoto = []
+let listRooms = []
 const camera = new Camera(video)
 
 btnCamera.addEventListener("click",()=>{
@@ -98,26 +99,19 @@ let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
         }).then(response => response.json())
         .then(data => {
             let content = ``;
-
+            listRooms = data.data
+            console.log(listRooms);
             for (let item of data.data) {
                 content += ` 
                 <div class="cards-grid habitaciones">
                     <div class="flip-card">
-                      <div class="flip-card-inner-2" style="box-shadow: 1px 8px 10px rgba(255, 0, 0, 0.749);">
+                      <div class="flip-card-inner" style="box-shadow: 1px 8px 10px rgba(255, 0, 0, 0.749);">
                         <div class="flip-card-front">
                           <strong class="text-center" id="desabilitado">${item.number}</strong>
                         </div>
                         <div class="flip-card-back">
                           <div class="row">
                             <h3>Acciones</h3>
-                            <div class="col-md-12">
-                              <div class="col-md-12 text-center">
-                                <button type="button" data-mdb-toggle="tooltip" data-mdb-placement="bottom" title="Limpiar" class="btn btn-primary btn-floating">
-                                  <i class="fa-solid fa-broom"></i>
-                                </button>
-                              </div>
-                              <br>
-                            </div>
                             <div class="col-md-12">
                             <div class="col-md-12 text-center">
                                 <button type="button" data-mdb-toggle="tooltip" data-mdb-placement="bottom"
@@ -130,23 +124,23 @@ let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
                             <div class="col-md-12">
                                 <div class="col-md-12 text-center">
                                     <button type="button" class="btn btn-success btn-floating" data-toggle="modal" id="open-incidence"
-                                        data-target="#basicExampleModal" onClick="openModal(${item.id})">
+                                        data-target="#basicExampleModal" onClick="showDetails(${item.id})">
                                         <i class="fa-solid fa-circle-check"></i>
                                     </button>
                                 </div>
                             </div>
-                            <br>
                                 </div>
+                                <br>
                                 <div class="col-md-12">
-                                <div class="col-md-12 text-center">
-                                    <form action="/pages/history.html">
-                                    <button type="submit" class="btn btn-info btn-floating">
-                                        <i class="fa-solid fa-clock"></i>
-                                    </button>
-                                    </form>
+                                    <div class="col-md-12 text-center">
+                                        <form action="/pages/history.html">
+                                            <button type="submit" class="btn btn-info btn-floating">
+                                                <i class="fa-solid fa-clock"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
-                                </div>
-                          </div>
+                            </div>
                         </div>
                       </div>
                     </div>
@@ -158,7 +152,6 @@ let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
             document.getElementById("card-rooms-with-status-blocked").innerHTML = content;
         })
 }
-let listRooms = []
 
 let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
 
@@ -187,7 +180,7 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
                           <div class="col-md-12">
                             <div class="col-md-12 text-center">
                                 <button type="button" class="btn btn-success btn-floating" data-toggle="modal" id="open-incidence"
-                                    data-target="#basicExampleModal" onClick="showDetails(${item.id})">
+                                    data-target="#basicExampleModal">
                                     <i class="fa-solid fa-circle-check"></i>
                                 </button>
                             </div>
@@ -216,19 +209,46 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
 
 //Alertas
 let openModal = (id) => {
+    console.log('entra a openModal');
+    const date = Date.now()
+    const today = new Date(date)
+    let observationsIn = document.getElementById('observationsIn').value
+    console.log(observationsIn);
+    let data = {
+        ended: today.toISOString(),
+        observations: observationsIn,
+        evidence: arrayPhoto,
+        status_cleaning_id: 4
+    }
+    setDataFromBtn(id, data)
+}
+
+let showDetails = (params) =>{
+    let room = JSON.stringify(listRooms.find(it => it.id === params))
+    console.log('showDetails ' + room);
+    let roomJSON = JSON.parse(room)
+    console.log(arrayPhoto);
+    console.log(roomJSON.evidence);
+    console.log(roomJSON);
+    let observationsIn = document.getElementById('observationsIn')
+    observationsIn.value = roomJSON.observations
+    photo.setAttribute('src',roomJSON.evidence)
+
+    let data = {
+        observations: observationsIn,
+        evidence: arrayPhoto != null ? arrayPhoto : roomJSON.evidence
+    }
+
+    setDataFromBtn(roomJSON.id, data)
+}
+
+let setDataFromBtn = (id, data) =>{
     let btnSend = document.querySelector("#send-incidences")
     btnSend.addEventListener("click", () => {
         const date = Date.now()
         const today = new Date(date)
         let observationsIn = document.getElementById('observationsIn').value
         //let evidenceIn = document.getElementById('evidenceIn')
-        console.log('observations'+ observationsIn);
-        let data = {
-            ended: today.toISOString(),
-            observations: observationsIn,
-            evidence: arrayPhoto,
-            status_cleaning_id: 4
-        }
         if (observationsIn) {
             Swal.fire({
                 title: 'Estas seguro?',
@@ -267,17 +287,6 @@ let openModal = (id) => {
             Swal.fire('Debes llenar el campo de comentarios', '', 'info')
         }
     })
-}
-
-let showDetails = (params) =>{
-    let room = JSON.stringify(listRooms.find(it => it.id === params))
-    let roomJSON = JSON.parse(room)
-    console.log(arrayPhoto);
-    console.log(roomJSON.evidence);
-    console.log(roomJSON);
-    let observationsIn = document.getElementById('observationsIn')
-    observationsIn.value = roomJSON.observations
-    photo.setAttribute('src',roomJSON.evidence)
 }
 
 let setIncidence = async (id, data) => {
