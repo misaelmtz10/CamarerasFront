@@ -35,7 +35,6 @@ let getRoomsByUserByStatusAssigned = (idBuilding, idStatus) => {
         }).then(response => response.json())
         .then(data => {
             let content = ``;
-            console.log(data.data);
 
             for (let item of data.data) {
                 content += ` 
@@ -100,7 +99,6 @@ let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
         .then(data => {
             let content = ``;
             listRooms = data.data
-            console.log(listRooms);
             for (let item of data.data) {
                 content += ` 
                 <div class="cards-grid habitaciones">
@@ -165,7 +163,7 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
         }).then(response => response.json())
         .then(data => {
             let content = ``;
-            listRooms = data.data
+            //listRooms = data.data
             for (let item of data.data) {
                 content += ` 
                 <div class="cards-grid habitaciones">
@@ -209,11 +207,9 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
 
 //Alertas
 let openModal = (id) => {
-    console.log('entra a openModal');
     const date = Date.now()
     const today = new Date(date)
     let observationsIn = document.getElementById('observationsIn').value
-    console.log(observationsIn);
     let data = {
         ended: today.toISOString(),
         observations: observationsIn,
@@ -225,13 +221,10 @@ let openModal = (id) => {
 
 let showDetails = (params) =>{
     let room = JSON.stringify(listRooms.find(it => it.id === params))
-    console.log('showDetails ' + room);
     let roomJSON = JSON.parse(room)
-    console.log(arrayPhoto);
+    let observationsIn = document.getElementById('observationsIn').value
+    observationsIn = roomJSON.observations
     console.log(roomJSON.evidence);
-    console.log(roomJSON);
-    let observationsIn = document.getElementById('observationsIn')
-    observationsIn.value = roomJSON.observations
     photo.setAttribute('src',roomJSON.evidence)
 
     let data = {
@@ -239,16 +232,18 @@ let showDetails = (params) =>{
         evidence: arrayPhoto != null ? arrayPhoto : roomJSON.evidence
     }
 
+    
+
     setDataFromBtn(roomJSON.id, data)
 }
 
 let setDataFromBtn = (id, data) =>{
+    console.log(data);
     let btnSend = document.querySelector("#send-incidences")
     btnSend.addEventListener("click", () => {
         const date = Date.now()
         const today = new Date(date)
         let observationsIn = document.getElementById('observationsIn').value
-        //let evidenceIn = document.getElementById('evidenceIn')
         if (observationsIn) {
             Swal.fire({
                 title: 'Estas seguro?',
@@ -263,8 +258,9 @@ let setDataFromBtn = (id, data) =>{
                 if (result.isConfirmed) {
                     
                     //const resultFirebase = saveImageFirebase(arrayPhoto)
-                    const resultRequest = setIncidence(id, data).then((data) => {
-                        if (data.data) {
+                    const resultRequest = setIncidence(id, data).then((dataRes) => {
+                        console.log('data: '+data);
+                        if (dataRes.data) {
                             Swal.fire('¡Envío éxitoso!', '', 'success')
                             $('#basicExampleModal').modal('hide')
                             const params = new URLSearchParams(document.location.search)
