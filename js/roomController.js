@@ -261,8 +261,8 @@ let setDataFromBtn = (id, data, isUpdate) => {
                             const params = new URLSearchParams(document.location.search)
                             const id = params.get("id")
                             getRoomsByUserByStatusBlocked(id, 4)
-                            getRoomsByUserByStatusAssigned(id, 1)
-                            getRoomsByUserByStatusReleased(id, 2)
+                            getRoomsByUserByStatusAssigned(id, 2)
+                            getRoomsByUserByStatusReleased(id, 1)
                         } else {
                             Swal.fire('¡Algo ocurrió, intenta de nuevo!', '', 'error')
                         }
@@ -330,8 +330,8 @@ let limpiar = (id) => {
                             const params = new URLSearchParams(document.location.search)
                             const id = params.get("id")
                             getRoomsByUserByStatusBlocked(id, 4)
-                            getRoomsByUserByStatusAssigned(id, 1)
-                            getRoomsByUserByStatusReleased(id, 2)
+                            getRoomsByUserByStatusAssigned(id, 2)
+                            getRoomsByUserByStatusReleased(id, 1)
                         } else {
                             Swal.fire('¡Algo ocurrió, intenta de nuevo!', '', 'error')
                         }
@@ -352,7 +352,7 @@ let changeStatusRoom = async (id) => {
     let data = {
         started: today.toISOString(),
         ended: today.toISOString(),
-        status_cleaning_id: 2
+        status_cleaning_id: 1
     }
     const request = await fetch(`http://${host}:8000/api/room/updateRoom/${id}`, {
         method: 'PUT',

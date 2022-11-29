@@ -1,13 +1,13 @@
-let host = "localhost"
+let host = "192.168.137.176"
 
-var db = new PouchDB('todos')
+/*var db = new PouchDB('todos')
 var remoteCouch = false
 var cookie
 
 db.changes({
     since: 'now',
     live: true
-}).on('change', /*showTodos*/);
+}).on('change', showTodos);*/
 
 // We have to create a new todo document and enter it in the database
 /*function addTodo(text) {
@@ -38,7 +38,7 @@ function showTodos() {
 
 if (navigator.serviceWorker) {
     //identificar si estoy en local o github
-    //navigator.serviceWorker.register('/sw.js');
+    navigator.serviceWorker.register('/sw.js');
 }
 
 
