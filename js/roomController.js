@@ -5,6 +5,8 @@ const btnTakePhoto = document.getElementById("btnTakePhoto")
 const video = document.getElementById("video")
 const photo = document.getElementById("photo")
 const photoUpdate = document.getElementById("photoUpdate")
+//btn close
+const btnclose = document.querySelector("#btnclose");
 let arrayPhoto = []
 let listRooms = []
 let picture
@@ -12,10 +14,20 @@ const camera = new Camera(video)
 
 btnCamera.addEventListener("click", () => {
     camera.power();
-})
+    document.querySelector("#photoUpdate").setAttribute("style", "display: none;");
+    document.querySelector("#video").setAttribute("style", "display: initial; width: 50%; height: 65%;");
+});
+
+btnclose.addEventListener("click", () => {   
+    document.querySelector("#photoUpdate").setAttribute("style", "display: initial; width: 80%; height: 78%;");
+    document.querySelector("#video").setAttribute("style", "display: none;");
+});
+
+
 
 btnTakePhoto.addEventListener("click", () => {
     document.querySelector("#video").setAttribute("style", "display: none;");
+    document.querySelector("#photo").setAttribute("style", "display: initial; width: 50%; height: 65%;");
     picture = camera.takePhoto()
     camera.off();
     photo.setAttribute('src', picture)
@@ -113,7 +125,7 @@ let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
                             <br>
                             <div class="col-md-12">
                                 <div class="col-md-12 text-center">
-                                    <button type="button" class="btn btn-success btn-floating" data-toggle="modal" id="open-incidence"
+                                    <button type="button" class="btn btn-success btn-floating openmodaldes" data-toggle="modal" id="open-incidence"
                                         data-target="#basicExampleModal" onClick="showDetails(${item.id})">
                                         <i class="fa-solid fa-circle-check"></i>
                                     </button>
@@ -204,6 +216,7 @@ let openModal = (id) => {
 }
 
 let showDetails = (params) => {
+    document.querySelector("#video").setAttribute("style", "display: none;");
     let observationsIn = document.getElementById('observationsIn')
     let room = JSON.stringify(listRooms.find(it => it.id === params))
     let roomJSON = JSON.parse(room);

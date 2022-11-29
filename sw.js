@@ -45,6 +45,7 @@ self.addEventListener('install', (event) => {
             '/js/edit.js',
             '/js/roomController.js',
             '/js/verifySession.js',
+            'js/pouchdb-nightly.js',
             '/img/lock.png',
             '/img/icono-login.png',
             '/img/icono-registro.png',
@@ -67,7 +68,8 @@ self.addEventListener('install', (event) => {
             'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/webfonts/fa-solid-900.woff2',
             'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/webfonts/fa-regular-400.woff2',
             'https://assets5.lottiefiles.com/packages/lf20_ijqswcfu.json',
-            'https://assets1.lottiefiles.com/packages/lf20_sg3gnsmo.json'
+            'https://assets1.lottiefiles.com/packages/lf20_sg3gnsmo.json',
+            '//cdn.jsdelivr.net/npm/pouchdb@7.3.1/dist/pouchdb.min.js'
         ])
     });
     event.waitUntil(Promise.all([respCacheInmutable, respCache]));
