@@ -1,7 +1,6 @@
 let token = localStorage.getItem("myToken")
 window.onload = function () {
     verifySession()
-    console.log('onload');
 }
 
 let getBuildingsByUser = () => {

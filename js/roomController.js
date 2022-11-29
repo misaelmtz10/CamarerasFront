@@ -4,20 +4,21 @@ const btnTakePhoto = document.getElementById("btnTakePhoto")
 
 const video = document.getElementById("video")
 const photo = document.getElementById("photo")
+const photoUpdate = document.getElementById("photoUpdate")
 let arrayPhoto = []
 let listRooms = []
+let picture
 const camera = new Camera(video)
 
-btnCamera.addEventListener("click",()=>{
+btnCamera.addEventListener("click", () => {
     camera.power();
 })
 
-btnTakePhoto.addEventListener("click",()=>{
+btnTakePhoto.addEventListener("click", () => {
     document.querySelector("#video").setAttribute("style", "display: none;");
-    let picture = camera.takePhoto()
+    picture = camera.takePhoto()
     camera.off();
-    photo.setAttribute('src',picture)
-    arrayPhoto.push(picture)
+    photo.setAttribute('src', picture)
 })
 
 window.onload = function () {
@@ -26,13 +27,13 @@ window.onload = function () {
 
 let getRoomsByUserByStatusAssigned = (idBuilding, idStatus) => {
     fetch(`http://${host}:8000/api/room/getAllByUser/${idBuilding}/${idStatus}`, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                Authorization: "Bearer " + token,
-            },
-        }).then(response => response.json())
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + token,
+        },
+    }).then(response => response.json())
         .then(data => {
             let content = ``;
 
@@ -67,13 +68,12 @@ let getRoomsByUserByStatusAssigned = (idBuilding, idStatus) => {
                                 <br>
                                 </div>
                                 <div class="col-md-12">
-                                <div class="col-md-12 text-center">
-                                    <form action="/pages/history.html">
-                                    <button type="submit" class="btn btn-info btn-floating">
-                                        <i class="fa-solid fa-clock"></i>
-                                    </button>
-                                    </form>
-                                </div>
+                                    <div class="col-md-12 text-center">
+                                        <button type="button" class="btn btn-info btn-floating" data-toggle="modal"
+                                            data-target="#modal-history" onClick="setHistory(${item.rooms_id})">
+                                            <i class="fa-solid fa-clock"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             </div>
@@ -89,13 +89,13 @@ let getRoomsByUserByStatusAssigned = (idBuilding, idStatus) => {
 
 let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
     fetch(`http://${host}:8000/api/room/getAllByUser/${idBuilding}/${idStatus}`, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                Authorization: "Bearer " + token,
-            },
-        }).then(response => response.json())
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + token,
+        },
+    }).then(response => response.json())
         .then(data => {
             let content = ``;
             listRooms = data.data
@@ -123,11 +123,10 @@ let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
                                 <br>
                                 <div class="col-md-12">
                                     <div class="col-md-12 text-center">
-                                        <form action="/pages/history.html">
-                                            <button type="submit" class="btn btn-info btn-floating">
-                                                <i class="fa-solid fa-clock"></i>
-                                            </button>
-                                        </form>
+                                        <button type="button" class="btn btn-info btn-floating" data-toggle="modal"
+                                            data-target="#modal-history" onClick="setHistory(${item.rooms_id})">
+                                            <i class="fa-solid fa-clock"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -146,16 +145,15 @@ let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
 let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
 
     fetch(`http://${host}:8000/api/room/getAllByUser/${idBuilding}/${idStatus}`, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                Authorization: "Bearer " + token,
-            },
-        }).then(response => response.json())
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + token,
+        },
+    }).then(response => response.json())
         .then(data => {
             let content = ``;
-            //listRooms = data.data
             for (let item of data.data) {
                 content += ` 
                 <div class="cards-grid habitaciones">
@@ -167,24 +165,14 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
                       <div class="flip-card-back">
                         <div class="row">
                           <h3>Acciones</h3>
-                          <div class="col-md-12">
-                            <div class="col-md-12 text-center">
-                                <button type="button" class="btn btn-success btn-floating" data-toggle="modal" id="open-incidence"
-                                    data-target="#basicExampleModal">
-                                    <i class="fa-solid fa-circle-check"></i>
-                                </button>
+                            <div class="col-md-12">
+                                <div class="col-md-12 text-center">
+                                    <button type="button" class="btn btn-info btn-floating" data-toggle="modal"
+                                        data-target="#modal-history" onClick="setHistory(${item.rooms_id})">
+                                        <i class="fa-solid fa-clock"></i>
+                                    </button>
+                                </div>
                             </div>
-                            <br>
-                          </div>
-                          <div class="col-md-12">
-                            <div class="col-md-12 text-center">
-                                <button type="button" class="btn btn-info btn-floating" data-toggle="modal"
-                                    data-target="#modal-history">
-                                    <i class="fa-solid fa-clock"></i>
-                                </button>
-                                
-                            </div>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -201,46 +189,39 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
 let openModal = (id) => {
     const date = Date.now()
     const today = new Date(date)
-    let observationsIn = document.getElementById('observationsIn').value
+    $('#observationsIn').val('')
+    picture = ""
+    photoUpdate.setAttribute('src', '')
 
     let data = {
         started: today.toISOString(),
         ended: today.toISOString(),
         observations: document.getElementById('observationsIn'),
-        evidence: arrayPhoto,
+        evidence: picture,
         status_cleaning_id: 4
     }
-    console.log(data);
-    setDataFromBtn(id, data)
+    setDataFromBtn(id, data, false)
 }
 
-let showDetails = (params) =>{
-    let room = JSON.stringify(listRooms.find(it => it.id === params))
-    let roomJSON = JSON.parse(room)
-    console.log(roomJSON);
+let showDetails = (params) => {
     let observationsIn = document.getElementById('observationsIn')
+    let room = JSON.stringify(listRooms.find(it => it.id === params))
+    let roomJSON = JSON.parse(room);
     observationsIn.value = roomJSON.observations != null ? roomJSON.observations : observationsIn
-    photo.setAttribute('src',roomJSON.evidence)
-    
-    /*console.log('evidence: ' +roomJSON.evidence);
-    console.log('observations: ' + observationsIn);*/
+    const photoStr = roomJSON.evidence
+    photoUpdate.setAttribute('src', photoStr)
 
     let data = {
         observations: observationsIn,
-        evidence: arrayPhoto != null ? arrayPhoto : roomJSON.evidence
+        evidence: picture != null ? picture : roomJSON.evidence
     }
 
-    console.log('data: ' +data);
-
-    setDataFromBtn(roomJSON.id, data)
+    setDataFromBtn(roomJSON.id, data, true)
 }
 
-let setDataFromBtn = (id, data) =>{
-    //console.log(data);
+let setDataFromBtn = (id, data, isUpdate) => {
     let btnSend = document.querySelector("#send-incidences")
     btnSend.addEventListener("click", () => {
-        const date = Date.now()
-        const today = new Date(date)
         let observationsIn = document.getElementById('observationsIn').value
         if (observationsIn) {
             Swal.fire({
@@ -255,11 +236,14 @@ let setDataFromBtn = (id, data) =>{
 
                 if (result.isConfirmed) {
                     data.observations = observationsIn
-                    //const resultFirebase = saveImageFirebase(arrayPhoto)
+                    data.evidence = data.evidence != null ? data.evidence : picture
                     const resultRequest = setIncidence(id, data).then((dataRes) => {
-                        console.log('data: '+data);
                         if (dataRes.data) {
-                            Swal.fire('¡Envío éxitoso!', '', 'success')
+                            if (isUpdate) {
+                                Swal.fire('Actualización éxitosa!', '', 'success')   
+                            } else {
+                                Swal.fire('Registro éxitoso!', '', 'success')
+                            }
                             $('#basicExampleModal').modal('hide')
                             const params = new URLSearchParams(document.location.search)
                             const id = params.get("id")
@@ -367,3 +351,55 @@ let changeStatusRoom = async (id) => {
     })
     return response = await request.json()
 }
+
+const getDatetime = (d) => {
+    let date = new Date(d);
+    let day = date.getDate();
+    let month = date.getMonth();
+    let year = date.getFullYear();
+    let monthText = month === 0 ? "Enero" : month === 1 ? "Febrero" : month === 2 ? "Marzo" : month === 3 ? "Abril" : month === 4 ? "Mayo" : month === 5 ? "Junio" : month === 6 ? "Julio" : month === 7 ? "Agosto" : month === 8 ? "Septiembre" : month === 9 ? "Octubre" : month === 10 ? "Noviembre" : month === 11 ? "Diciembre" : month;
+    return day < 10 ? "0" + day + " de " + monthText + ", " + year : day + " de " + monthText + ", " + year;
+};
+
+let setHistory = async (idRoom) => {
+    fetch(`http://${host}:8000/api/room/getAllByRoomId/${idRoom}`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + token,
+        },
+    }).then(response => response.json())
+        .then(data => {
+            let content = ``;
+            let dateFull
+            let dateFormat
+            let dateLocal
+            for (let item of data.data) {
+                dateFull = item.started != null ? item.started : item.ended
+                dateFormat = getDatetime(new Date(dateFull))
+                dateLocal = new Date(item.started).toLocaleTimeString()
+                content += ` 
+                <tr>
+                    <td>${dateFormat}</td>
+                    <td>${dateLocal}</td>`
+                    if (item.status_cleaning_id === 2) {
+                        content += `<td><span class="badge rounded-pill badge-primary"
+                            style="background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);">Limpiada</span>
+                        </td>`
+                    }else if (item.status_cleaning_id === 3) {
+                        content += `<td><span class="badge rounded-pill badge-success"
+                            style="background-image: linear-gradient(-45deg, #eb4444 0%, #fe044b 100%);">Liberada</span>
+                        </td>`
+                    }else if (item.status_cleaning_id === 4) {
+                        content += `<td><span class="badge rounded-pill badge-danger"
+                            style="background-image: linear-gradient(-45deg, #eb4444 0%, #fe044b 100%);">Incidencia</span>
+                        </td>`  
+                    }
+                content +=`</tr>`
+            }
+            // Setting innerHTML as content variable
+            document.getElementById("table-history").innerHTML = content;
+    })
+}
+
