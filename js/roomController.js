@@ -110,15 +110,7 @@ let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
                         <div class="flip-card-back">
                           <div class="row">
                             <h3>Acciones</h3>
-                            <div class="col-md-12">
-                            <div class="col-md-12 text-center">
-                                <button type="button" data-mdb-toggle="tooltip" data-mdb-placement="bottom"
-                                    title="Limpiar" onClick="limpiar(${item.id})" class="btn btn-primary btn-floating">
-                                    <i class="fa-solid fa-broom"></i>
-                                </button>
-                            </div>
-                              <br>
-                            </div>
+                            <br>
                             <div class="col-md-12">
                                 <div class="col-md-12 text-center">
                                     <button type="button" class="btn btn-success btn-floating" data-toggle="modal" id="open-incidence"
@@ -186,11 +178,11 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
                           </div>
                           <div class="col-md-12">
                             <div class="col-md-12 text-center">
-                                <form action="/pages/history.html">
-                                <button type="submit" class="btn btn-info btn-floating">
+                                <button type="button" class="btn btn-info btn-floating" data-toggle="modal"
+                                    data-target="#modal-history">
                                     <i class="fa-solid fa-clock"></i>
                                 </button>
-                                </form>
+                                
                             </div>
                           </div>
                         </div>
@@ -210,35 +202,41 @@ let openModal = (id) => {
     const date = Date.now()
     const today = new Date(date)
     let observationsIn = document.getElementById('observationsIn').value
+
     let data = {
+        started: today.toISOString(),
         ended: today.toISOString(),
-        observations: observationsIn,
+        observations: document.getElementById('observationsIn'),
         evidence: arrayPhoto,
         status_cleaning_id: 4
     }
+    console.log(data);
     setDataFromBtn(id, data)
 }
 
 let showDetails = (params) =>{
     let room = JSON.stringify(listRooms.find(it => it.id === params))
     let roomJSON = JSON.parse(room)
-    let observationsIn = document.getElementById('observationsIn').value
-    observationsIn = roomJSON.observations
-    console.log(roomJSON.evidence);
+    console.log(roomJSON);
+    let observationsIn = document.getElementById('observationsIn')
+    observationsIn.value = roomJSON.observations != null ? roomJSON.observations : observationsIn
     photo.setAttribute('src',roomJSON.evidence)
+    
+    /*console.log('evidence: ' +roomJSON.evidence);
+    console.log('observations: ' + observationsIn);*/
 
     let data = {
         observations: observationsIn,
         evidence: arrayPhoto != null ? arrayPhoto : roomJSON.evidence
     }
 
-    
+    console.log('data: ' +data);
 
     setDataFromBtn(roomJSON.id, data)
 }
 
 let setDataFromBtn = (id, data) =>{
-    console.log(data);
+    //console.log(data);
     let btnSend = document.querySelector("#send-incidences")
     btnSend.addEventListener("click", () => {
         const date = Date.now()
@@ -256,7 +254,7 @@ let setDataFromBtn = (id, data) =>{
             }).then((result) => {
 
                 if (result.isConfirmed) {
-                    
+                    data.observations = observationsIn
                     //const resultFirebase = saveImageFirebase(arrayPhoto)
                     const resultRequest = setIncidence(id, data).then((dataRes) => {
                         console.log('data: '+data);
