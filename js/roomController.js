@@ -4,8 +4,6 @@ const btnTakePhoto = document.getElementById("btnTakePhoto")
 
 const video = document.getElementById("video")
 const photo = document.getElementById("photo")
-const photoUpdate = document.getElementById("photoUpdate")
-//btn close
 const btnclose = document.querySelector("#btnclose");
 let arrayPhoto = []
 let listRooms = []
@@ -20,26 +18,17 @@ btnCamera.addEventListener("click", () => {
     camera.power();
     document.querySelector("#photoUpdate").setAttribute("style", "display: none;");
     document.querySelector("#video").setAttribute("style", "display: initial;");
-   /*
-    
-    document.querySelector("#photo").setAttribute("style", "display: none !important;");
-     */
 });
 
 btnclose.addEventListener("click", () => {
     camera.off();
     document.querySelector("#photoUpdate").setAttribute("style", "display: initial;");
     document.querySelector("#video").setAttribute("style", "display: none;");
-   /* document.querySelector("#photo").setAttribute("style", "display: none;");
-    document.querySelector("#photoUpdate").setAttribute("style", "display: initial;");
-    document.querySelector("#video").setAttribute("style", "display: none;"); */
 });
 
 
 
 btnTakePhoto.addEventListener("click", () => {
-    /*document.querySelector("#video").setAttribute("style", "display: none;");
-    document.querySelector("#photo").setAttribute("style", "display: initial;"); */
     picture = camera.takePhoto()
     camera.off();
     photo.setAttribute('src', picture)
@@ -60,9 +49,15 @@ let getRoomsByUserByStatusAssigned = (idBuilding, idStatus) => {
     }).then(response => response.json())
         .then(data => {
             let content = ``;
-            console.log("data" + data.data)
+            console.log(data);
+            if (data.data.length === 0) {
+                content += `
+                    <div class="alert alert-primary" role="alert">
+                        No hay habitaciones asignadas o sucias
+                    </div>
+                `
+            }
             for (let item of data.data) {
-                console.log(item)
                 content += ` 
                 <div class="cards-grid habitaciones">
                     <div class="flip-card">
@@ -125,7 +120,6 @@ let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
             let content = ``;
             listRooms = data.data
             for (let item of data.data) {
-                console.log("Statusblocked" , item)
                 content += ` 
                 <div class="cards-grid habitaciones">
                     <div class="flip-card">
@@ -181,7 +175,6 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
         .then(data => {
             let content = ``;
             for (let item of data.data) {
-                console.log("Status relesed", item)
                 content += ` 
                 <div class="cards-grid habitaciones">
                   <div class="flip-card">
@@ -214,26 +207,22 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
 
 //Alertas
 let openModal = (id, estatus) => {
-    console.log("estatus" + estatus)
+    $('#observationsIn').val('')
+    $('#photo').attr("src", "")
+
     if (estatus === 1) {
-       
         document.querySelector("#photoUpdate").setAttribute("style", "display: none !important;");
         document.querySelector("#video").setAttribute("style", "display: none;");
-        
     }
+
     const date = Date.now()
-        const today = new Date(date)
-        $('#observationsIn').val('')
-        picture = ""
-       // photoUpdate.setAttribute('src', '')
-       imgactualizada.src = ""
-        let data = {
-            started: today.toISOString(),
-            ended: today.toISOString(),
-            observations: document.getElementById('observationsIn'),
-            evidence: picture,
-            status_cleaning_id: 4
-        }
+    const today = new Date(date)
+
+    let data = {
+        started: today.toISOString(),
+        ended: today.toISOString(),
+    }
+
     setDataFromBtn(id, data, false)
 }
 
@@ -243,12 +232,12 @@ let showDetails = (params, estatus) => {
         document.querySelector("#photoUpdate").setAttribute("style", "display: initial !important;");
         document.querySelector("#video").setAttribute("style", "display: none !important;");
     }
+
     let observationsIn = document.getElementById('observationsIn')
     let room = JSON.stringify(listRooms.find(it => it.id === params))
     let roomJSON = JSON.parse(room);
     observationsIn.value = roomJSON.observations != null ? roomJSON.observations : observationsIn
     const photoStr = roomJSON.evidence
-    //photoUpdate.setAttribute('src', photoStr)
     imgactualizada.src = photoStr
     let data = {
         observations: observationsIn,
@@ -262,7 +251,7 @@ let setDataFromBtn = (id, data, isUpdate) => {
     let btnSend = document.querySelector("#send-incidences")
     btnSend.addEventListener("click", () => {
         let observationsIn = document.getElementById('observationsIn').value
-        if (observationsIn) {
+        if (observationsIn && picture) {
             Swal.fire({
                 title: 'Estas seguro?',
                 text: "¡No podrás revertir esto!",
@@ -274,8 +263,20 @@ let setDataFromBtn = (id, data, isUpdate) => {
             }).then((result) => {
 
                 if (result.isConfirmed) {
-                    data.observations = observationsIn
-                    data.evidence = data.evidence != null ? data.evidence : picture
+                    if (isUpdate) {
+                        data.evidence = data.evidence != null ? data.evidence : picture
+                        data.observations = observationsIn
+                    } else {
+                        let newData = {
+                            started: data.started,
+                            ended: data.ended,
+                            observations: observationsIn,
+                            evidence: picture,
+                            status_cleaning_id: 4
+                        }
+                        data = newData
+                    }
+                    //data.observations = observationsIn
                     const resultRequest = setIncidence(id, data).then((dataRes) => {
                         if (dataRes.data) {
                             if (isUpdate) {
@@ -303,7 +304,7 @@ let setDataFromBtn = (id, data, isUpdate) => {
                 }
             })
         } else {
-            Swal.fire('Debes llenar el campo de comentarios', '', 'info')
+            Swal.fire('Campos vacíos o incorrectos', '', 'warning')
         }
     })
 }
