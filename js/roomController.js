@@ -12,24 +12,34 @@ let listRooms = []
 let picture
 const camera = new Camera(video)
 
+//img fix
+const imgactualizada = document.querySelector("#photoUpdate")
+
+
 btnCamera.addEventListener("click", () => {
     camera.power();
     document.querySelector("#photoUpdate").setAttribute("style", "display: none;");
+    document.querySelector("#video").setAttribute("style", "display: initial;");
+   /*
+    
     document.querySelector("#photo").setAttribute("style", "display: none !important;");
-    document.querySelector("#video").setAttribute("style", "display: initial; width: 60% !important;height: 70% !important;");
+     */
 });
 
-btnclose.addEventListener("click", () => {   
-    document.querySelector("#photo").setAttribute("style", "display: none;");
-    document.querySelector("#photoUpdate").setAttribute("style", "display: initial; width: 60% !important;height: 70% !important;");
+btnclose.addEventListener("click", () => {
+    camera.off();
+    document.querySelector("#photoUpdate").setAttribute("style", "display: initial;");
     document.querySelector("#video").setAttribute("style", "display: none;");
+   /* document.querySelector("#photo").setAttribute("style", "display: none;");
+    document.querySelector("#photoUpdate").setAttribute("style", "display: initial;");
+    document.querySelector("#video").setAttribute("style", "display: none;"); */
 });
 
 
 
 btnTakePhoto.addEventListener("click", () => {
-    document.querySelector("#video").setAttribute("style", "display: none;");
-    document.querySelector("#photo").setAttribute("style", "display: initial; width: 75% !important;height: 35% !important;");
+    /*document.querySelector("#video").setAttribute("style", "display: none;");
+    document.querySelector("#photo").setAttribute("style", "display: initial;"); */
     picture = camera.takePhoto()
     camera.off();
     photo.setAttribute('src', picture)
@@ -50,8 +60,9 @@ let getRoomsByUserByStatusAssigned = (idBuilding, idStatus) => {
     }).then(response => response.json())
         .then(data => {
             let content = ``;
-
+            console.log("data" + data.data)
             for (let item of data.data) {
+                console.log(item)
                 content += ` 
                 <div class="cards-grid habitaciones">
                     <div class="flip-card">
@@ -74,8 +85,8 @@ let getRoomsByUserByStatusAssigned = (idBuilding, idStatus) => {
                                 </div>
                                 <div class="col-md-12">
                                 <div class="col-md-12 text-center">
-                                    <button type="button" class="btn btn-success btn-floating" data-toggle="modal" id="open-incidence"
-                                        data-target="#basicExampleModal" onClick="openModal(${item.id})">
+                                    <button type="button" class="btn btn-success btn-floating" data-toggle="modal"  id="open-incidence"
+                                        data-target="#basicExampleModal" onClick="openModal(${item.id},${item.status_cleaning_id})">
                                         <i class="fa-solid fa-circle-check"></i>
                                     </button>
                                 </div>
@@ -114,6 +125,7 @@ let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
             let content = ``;
             listRooms = data.data
             for (let item of data.data) {
+                console.log("Statusblocked" , item)
                 content += ` 
                 <div class="cards-grid habitaciones">
                     <div class="flip-card">
@@ -128,7 +140,7 @@ let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
                             <div class="col-md-12">
                                 <div class="col-md-12 text-center">
                                     <button type="button" class="btn btn-success btn-floating openmodaldes" data-toggle="modal" id="open-incidence"
-                                        data-target="#basicExampleModal" onClick="showDetails(${item.id})">
+                                        data-target="#basicExampleModal" onClick="showDetails(${item.id}, ${item.status_cleaning_id})">
                                         <i class="fa-solid fa-circle-check"></i>
                                     </button>
                                 </div>
@@ -169,6 +181,7 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
         .then(data => {
             let content = ``;
             for (let item of data.data) {
+                console.log("Status relesed", item)
                 content += ` 
                 <div class="cards-grid habitaciones">
                   <div class="flip-card">
@@ -200,32 +213,43 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
 }
 
 //Alertas
-let openModal = (id) => {
-    const date = Date.now()
-    const today = new Date(date)
-    $('#observationsIn').val('')
-    picture = ""
-    photoUpdate.setAttribute('src', '')
-
-    let data = {
-        started: today.toISOString(),
-        ended: today.toISOString(),
-        observations: document.getElementById('observationsIn'),
-        evidence: picture,
-        status_cleaning_id: 4
+let openModal = (id, estatus) => {
+    console.log("estatus" + estatus)
+    if (estatus === 1) {
+       
+        document.querySelector("#photoUpdate").setAttribute("style", "display: none !important;");
+        document.querySelector("#video").setAttribute("style", "display: none;");
+        
     }
+    const date = Date.now()
+        const today = new Date(date)
+        $('#observationsIn').val('')
+        picture = ""
+       // photoUpdate.setAttribute('src', '')
+       imgactualizada.src = ""
+        let data = {
+            started: today.toISOString(),
+            ended: today.toISOString(),
+            observations: document.getElementById('observationsIn'),
+            evidence: picture,
+            status_cleaning_id: 4
+        }
     setDataFromBtn(id, data, false)
 }
 
-let showDetails = (params) => {
-    document.querySelector("#video").setAttribute("style", "display: none;");
+let showDetails = (params, estatus) => {
+    if(estatus === 4)
+    {   
+        document.querySelector("#photoUpdate").setAttribute("style", "display: initial !important;");
+        document.querySelector("#video").setAttribute("style", "display: none !important;");
+    }
     let observationsIn = document.getElementById('observationsIn')
     let room = JSON.stringify(listRooms.find(it => it.id === params))
     let roomJSON = JSON.parse(room);
     observationsIn.value = roomJSON.observations != null ? roomJSON.observations : observationsIn
     const photoStr = roomJSON.evidence
-    photoUpdate.setAttribute('src', photoStr)
-
+    //photoUpdate.setAttribute('src', photoStr)
+    imgactualizada.src = photoStr
     let data = {
         observations: observationsIn,
         evidence: picture != null ? picture : roomJSON.evidence
@@ -255,7 +279,7 @@ let setDataFromBtn = (id, data, isUpdate) => {
                     const resultRequest = setIncidence(id, data).then((dataRes) => {
                         if (dataRes.data) {
                             if (isUpdate) {
-                                Swal.fire('Actualización éxitosa!', '', 'success')   
+                                Swal.fire('Actualización éxitosa!', '', 'success')
                             } else {
                                 Swal.fire('Registro éxitoso!', '', 'success')
                             }
@@ -356,7 +380,7 @@ let changeStatusRoom = async (id) => {
     let data = {
         started: today.toISOString(),
         ended: today.toISOString(),
-        status_cleaning_id: 1
+        status_cleaning_id: 2
     }
     const request = await fetch(`http://${host}:8000/api/room/updateRoom/${id}`, {
         method: 'PUT',
@@ -400,23 +424,23 @@ let setHistory = async (idRoom) => {
                 <tr>
                     <td>${dateFormat}</td>
                     <td>${dateLocal}</td>`
-                    if (item.status_cleaning_id === 2) {
-                        content += `<td><span class="badge rounded-pill badge-primary"
+                if (item.status_cleaning_id === 2) {
+                    content += `<td><span class="badge rounded-pill badge-primary"
                             style="background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);">Limpiada</span>
                         </td>`
-                    }else if (item.status_cleaning_id === 3) {
-                        content += `<td><span class="badge rounded-pill badge-success"
+                } else if (item.status_cleaning_id === 3) {
+                    content += `<td><span class="badge rounded-pill badge-success"
                             style="background-image: linear-gradient(-45deg, #eb4444 0%, #fe044b 100%);">Liberada</span>
                         </td>`
-                    }else if (item.status_cleaning_id === 4) {
-                        content += `<td><span class="badge rounded-pill badge-danger"
+                } else if (item.status_cleaning_id === 4) {
+                    content += `<td><span class="badge rounded-pill badge-danger"
                             style="background-image: linear-gradient(-45deg, #eb4444 0%, #fe044b 100%);">Incidencia</span>
-                        </td>`  
-                    }
-                content +=`</tr>`
+                        </td>`
+                }
+                content += `</tr>`
             }
             // Setting innerHTML as content variable
             document.getElementById("table-history").innerHTML = content;
-    })
+        })
 }
 

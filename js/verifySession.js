@@ -16,9 +16,9 @@ let verifySession = async () => {
         }else if (path.includes('camarera.html')) {
             const params = new URLSearchParams(document.location.search)
             const id = params.get("id")
-            getRoomsByUserByStatusAssigned(id, 2)
+            getRoomsByUserByStatusAssigned(id, 1)
             getRoomsByUserByStatusBlocked(id, 4)
-            getRoomsByUserByStatusReleased(id, 1)
+            getRoomsByUserByStatusReleased(id, 2)
         }else if (path.includes('registerCamarera.html')) {
             //aquí van las acciones para admin
         }else{

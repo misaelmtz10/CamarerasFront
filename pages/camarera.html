@@ -14,6 +14,63 @@
   <!-- MDB -->
   <link rel="stylesheet" href="/css/target.css" />
   <link rel="stylesheet" href="/css/mdb.min.css" />
+  <style>
+    /*Style cards take photo and update photo*/
+    @media (min-width: 350px) {
+
+      #video {
+        display: initial;
+        width: 100% !important;
+        height: 90% !important;
+      }
+
+      #photo {
+        width: 100% !important;
+        height: 85% !important;
+      }
+
+      #photoUpdate {
+        width: 94% !important;
+        height: 55% !important;
+      }
+    }
+
+    @media (min-width: 992px) {
+      #video {
+        display: initial;
+        width: 60% !important;
+        height: 70% !important;
+      }
+
+      #photo {
+        width: 100% !important;
+        height: 54% !important;
+      }
+
+      #photoUpdate {
+        width: 49% !important;
+        height: 50% !important;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      #video {
+        display: initial;
+        width: 60% !important;
+        height: 70% !important;
+      }
+
+      #photo {
+        width: 100% !important;
+        height: 54% !important;
+      }
+
+      #photoUpdate {
+        width: 49% !important;
+        height: 50% !important;
+      }
+    }
+  </style>
 </head>
 
 <body id="">
@@ -154,20 +211,20 @@
                 </div>
                 <div class="row">
                   <div class="col-12 col-md-12 text-center">
-                    <img style="display: none ;width: 49%;height: 52%;" id="photoUpdate" src="" class="img-thumbnail"
+                    <img style="display: none " id="photoUpdate" src="" class="img-thumbnail"
                       alt="">
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-12 text-center">
                     <video id="video" class="img-thumbnail" autoplay
-                      style="width: 60% !important;height: 70% !important;"></video>
+                      style="display: none !important;"></video>
                   </div>
                 </div>
                 <br>
                 <div class="row">
                   <div class="col-12 col-md-12 text-center">
-                    <img style="width: 60% !important;height: 70% !important; display: none;" id="photo" src=""
+                    <img style=" display: none;" id="photo" src=""
                       class="img-thumbnail" alt="">
                   </div>
                 </div>
