@@ -380,10 +380,53 @@ a#pills-contact-tab:hover{
   border: 0;
   transition: all .2s ease;
 }
+
+/*Style cards take photo and update photo*/
 @media (min-width: 350px) {
+
   #video {
     display: initial;
     width: 100% !important;
     height: 90% !important;
   }
+  #photo{
+    width: 94% !important;
+    height: 54% !important;
+  }
+  #photoUpdate{
+    width: 94% !important;
+    height: 55% !important;
+  }
 }
+
+@media (min-width: 992px) { 
+  #video {
+    display: initial;
+    width: 60% !important;
+    height: 70% !important;
+  }
+  #photo{
+    width: 100% !important;
+    height: 54%  !important;
+  }
+  #photoUpdate{
+    width: 49% !important;
+    height: 50% !important;
+  }
+ }
+
+ @media (min-width: 1200px) { 
+  #video {
+    display: initial;
+    width: 60% !important;
+    height: 70% !important;
+  }
+  #photo{
+    width: 100% !important;
+    height: 54%  !important;
+  }
+  #photoUpdate{
+    width: 49% !important;
+    height: 50% !important;
+  }
+  }

@@ -124,8 +124,8 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form>
-              <div class="modal-body">
+            <form style="height: 85%;">
+              <div class="modal-body" style="overflow-y: hidden;height: 95%;">
                 <!-- Message input -->
                 <div class="form-outline mb-4">
                   <textarea class="form-control" id="observationsIn" rows="4"></textarea>
@@ -145,37 +145,37 @@
                     </div>
                   </div>
                 </div>-->
-                <div class="row">
-                  <div class="col-12 d-grid gap-2 mb-2">
-                    <button type="button" id="btnCamera" class="btn btn-success">Abrir camara</button>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-12 col-md-12 text-center">
-                    <img style="display: none ;width: 80%;height: 78%;" id="photoUpdate" src="" class="img-thumbnail" alt="">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-12 text-center">
-                    <video id="video" class="img-thumbnail" autoplay style="height:350px; width:90%"></video>
-                  </div>
-                </div>
-                <br>
-                <div class="row">
-                  <div class="col-12 d-grid gap-2" onclick="capturaFoto()">
+                <div class="row col-md-12" style="orientation: initial;">
+                  <div class="col-6 d-grid gap-2"><button type="button" id="btnCamera" class="btn btn-success">Abrir
+                      camara</button></div>
+                  <div class="col-6 d-grid gap-2" onclick="capturaFoto()">
                     <button type="button" id="btnTakePhoto" class="btn btn-primary">Capturar</button>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-12 col-md-12 text-center">
-                    <img id="photo" src="" class="img-thumbnail" alt="">
+                    <img style="display: none ;width: 49%;height: 52%;" id="photoUpdate" src="" class="img-thumbnail"
+                      alt="">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 text-center">
+                    <video id="video" class="img-thumbnail" autoplay
+                      style="width: 60% !important;height: 70% !important;"></video>
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-12 col-md-12 text-center">
+                    <img style="width: 60% !important;height: 70% !important; display: none;" id="photo" src=""
+                      class="img-thumbnail" alt="">
                   </div>
                 </div>
                 <!-- Submit button -->
               </div>
               <div class="modal-footer">
                 <button type="button" id="send-incidences" class="btn btn-primary">Enviar</button>
-                <button id="btnclose" type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button id="btnclosee" type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
               </div>
             </form>
           </div>

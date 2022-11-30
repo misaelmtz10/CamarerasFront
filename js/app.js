@@ -1,4 +1,4 @@
-let host = "192.168.137.176"
+let host = "localhost"
 
 /*var db = new PouchDB('todos')
 var remoteCouch = false

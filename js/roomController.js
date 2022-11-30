@@ -15,11 +15,13 @@ const camera = new Camera(video)
 btnCamera.addEventListener("click", () => {
     camera.power();
     document.querySelector("#photoUpdate").setAttribute("style", "display: none;");
-    document.querySelector("#video").setAttribute("style", "display: initial; width: 50%; height: 65%;");
+    document.querySelector("#photo").setAttribute("style", "display: none !important;");
+    document.querySelector("#video").setAttribute("style", "display: initial; width: 60% !important;height: 70% !important;");
 });
 
 btnclose.addEventListener("click", () => {   
-    document.querySelector("#photoUpdate").setAttribute("style", "display: initial; width: 80%; height: 78%;");
+    document.querySelector("#photo").setAttribute("style", "display: none;");
+    document.querySelector("#photoUpdate").setAttribute("style", "display: initial; width: 60% !important;height: 70% !important;");
     document.querySelector("#video").setAttribute("style", "display: none;");
 });
 
@@ -27,7 +29,7 @@ btnclose.addEventListener("click", () => {
 
 btnTakePhoto.addEventListener("click", () => {
     document.querySelector("#video").setAttribute("style", "display: none;");
-    document.querySelector("#photo").setAttribute("style", "display: initial; width: 50%; height: 65%;");
+    document.querySelector("#photo").setAttribute("style", "display: initial; width: 75% !important;height: 35% !important;");
     picture = camera.takePhoto()
     camera.off();
     photo.setAttribute('src', picture)
@@ -257,6 +259,8 @@ let setDataFromBtn = (id, data, isUpdate) => {
                             } else {
                                 Swal.fire('Registro éxitoso!', '', 'success')
                             }
+                            $('#observationsIn').val('')
+                            $('#photo').attr("src", "");
                             $('#basicExampleModal').modal('hide')
                             const params = new URLSearchParams(document.location.search)
                             const id = params.get("id")
