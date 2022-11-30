@@ -75,7 +75,7 @@ self.addEventListener('install', (event) => {
     event.waitUntil(Promise.all([respCacheInmutable, respCache]));
 });
 
-self.addEventListener('fetch', (event) =>{
+/*self.addEventListener('fetch', (event) =>{
     const resp = caches.match(event.request).then((respCache)=>{
          if(respCache){
              return respCache;
@@ -96,3 +96,4 @@ self.addEventListener('fetch', (event) =>{
      })
      event.respondWith(resp);
  });
+*/

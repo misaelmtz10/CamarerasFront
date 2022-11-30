@@ -265,8 +265,8 @@ let setDataFromBtn = (id, data, isUpdate) => {
                             const params = new URLSearchParams(document.location.search)
                             const id = params.get("id")
                             getRoomsByUserByStatusBlocked(id, 4)
-                            getRoomsByUserByStatusAssigned(id, 2)
-                            getRoomsByUserByStatusReleased(id, 1)
+                            getRoomsByUserByStatusAssigned(id, 1)
+                            getRoomsByUserByStatusReleased(id, 2)
                         } else {
                             Swal.fire('¡Algo ocurrió, intenta de nuevo!', '', 'error')
                         }
@@ -334,8 +334,8 @@ let limpiar = (id) => {
                             const params = new URLSearchParams(document.location.search)
                             const id = params.get("id")
                             getRoomsByUserByStatusBlocked(id, 4)
-                            getRoomsByUserByStatusAssigned(id, 2)
-                            getRoomsByUserByStatusReleased(id, 1)
+                            getRoomsByUserByStatusAssigned(id, 1)
+                            getRoomsByUserByStatusReleased(id, 2)
                         } else {
                             Swal.fire('¡Algo ocurrió, intenta de nuevo!', '', 'error')
                         }
