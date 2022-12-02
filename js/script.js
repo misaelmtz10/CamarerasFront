@@ -127,6 +127,8 @@ let redirectLikeRole = async () =>{
         setTimeout(function () { window.location.href = "http://localhost:8080/pages/edificio.html"; }, 200)
     } else {
         //aquí va la vista del admin
+        setTimeout(function () { window.location.href = "http://localhost:8080/pages/admin/admindashboard.html"; }, 200);
+        alert("eres admin")
     }
 }
 

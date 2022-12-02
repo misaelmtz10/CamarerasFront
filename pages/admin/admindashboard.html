@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Charts / ApexCharts - NiceAdmin Bootstrap Template</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="../../assets/img/favicon.png" rel="icon" />
+    <link href="../../assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <!-- Vendor CSS Files -->
+    <link
+      href="../../assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="../../assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="../../assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="../../assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="../../assets/vendor/simple-datatables/style.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="../../assets/css/style.css" rel="stylesheet" />
+
+    <!-- =======================================================
+        * Template Name: NiceAdmin - v2.4.1
+        * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+        * Author: BootstrapMade.com
+        * License: https://bootstrapmade.com/license/
+        ======================================================== -->
+  </head>
+
+  <body>
+    
+    <nav class="mb-1 navbar navbar-expand-lg navbar-dark" style=" overflow-y: hidden !important;background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);
+      width: 100%; height: 40%;">
+      <a class="navbar-brand" href="#" style="color: whitesmoke !important;"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
+        style="background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);"
+        aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <div style="padding-right:5%;" class="collapse navbar-collapse" id="navbarSupportedContent-4">
+        <ul class="navbar-nav ml-auto">
+          <li>
+            <button style="width: 100%;
+            height: 100%;
+            background: transparent;
+            color: wheat;
+            border: 0;" class="nav-item" onclick="signOut()">
+
+              <i class="fa-solid fa-person-walking-arrow-right"></i>&nbsp; Cerrar Sesión</button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <main id="main" class="main">
+      <div class="pagetitle">
+        <h1>Administrador Camareras</h1>
+      </div>
+      <!-- End Page Title -->
+
+      <section class="section dashboard">
+        <div class="row">
+          <!-- Left side columns -->
+          <div class="col-lg-8">
+            <div class="row">
+              <!-- Sales Card -->
+              <div class="col-xxl-4 col-md-6">
+                <div class="card info-card sales-card">
+                  <div class="card-body">
+                    <h5 class="card-title">Edificios</h5>
+
+                    <div class="d-flex align-items-center">
+                      <div
+                        class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                      >
+                        <i class="bi bi-building"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>Hoteles de calidad</h6>
+                        <span class="text-success small pt-1 fw-bold">Ver</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End Sales Card -->
+
+              <!-- Revenue Card -->
+              <div class="col-xxl-4 col-md-6">
+                <div class="card info-card revenue-card">
+                  <div class="card-body">
+                    <h5 class="card-title">Habitaciones</h5>
+
+                    <div class="d-flex align-items-center">
+                      <div
+                        class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                      >
+                        <i class="bx bx-bed"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>Limpieza extrema</h6>
+                        <span class="text-success small pt-1 fw-bold">Ver</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End Revenue Card -->
+
+              <!-- Customers Card -->
+              <div class="col-xxl-4 col-xl-12">
+                <div class="card info-card customers-card">
+                  <div class="card-body">
+                    <h5 class="card-title">Camareras</h5>
+
+                    <div class="d-flex align-items-center">
+                      <div
+                        class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                      >
+                        <i class="bi bi-people"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>Excelente personal</h6>
+
+                        <span class="text-danger small pt-1 fw-bold">
+                          <a
+                            style="text-decoration: none; color: #ff7747"
+                            href=""
+                            data-bs-toggle="modal"
+                            data-bs-target="#verticalycentered"
+                          >
+                            Gestionar
+                          </a>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End Customers Card -->
+
+              <!-- Recent Sales -->
+              <div class="col-12">
+                <div class="card recent-sales overflow-auto">
+                  <div class="card-body">
+                    <h5 class="card-title">Camareras</h5>
+
+                    <table >
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Habitación</th>
+                          <th scope="col">Camarera</th>
+                          <th scope="col">Fecha creación</th>
+                          <th scope="col">Estatus</th>
+                          <th scope="col">Opciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <table id="example" class="display table table-borderless datatable" style="width:100%">
+                <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Habitación</th>
+                      <th scope="col">Camarera</th>
+                      <th scope="col">Fecha creación</th>
+                      <th scope="col">Estatus</th>
+                      <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Cantoran Molina</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-success">Limpia</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Arce Salgado</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-danger">Sucia</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Cabrera Allende</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-success">Limpia</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Araujo Meza</td>
+                    <td>20/Oct/2022</td>
+                    <td>
+                      <span class="badge bg-primary">Incidencia</span>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#showIncident"
+                        class="btn btn-warning"
+                      >
+                        <i class="bi bi-exclamation-triangle"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Martinez Molina</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-info">Bloqueada</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Cantoran Molina</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-success">Limpia</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Arce Salgado</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-danger">Sucia</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Cabrera Allende</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-success">Limpia</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Araujo Meza</td>
+                    <td>20/Oct/2022</td>
+                    <td>
+                      <span class="badge bg-primary">Incidencia</span>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#showIncident"
+                        class="btn btn-warning"
+                      >
+                        <i class="bi bi-exclamation-triangle"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Martinez Molina</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-info">Bloqueada</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Cantoran Molina</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-success">Limpia</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Arce Salgado</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-danger">Sucia</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Cabrera Allende</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-success">Limpia</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Araujo Meza</td>
+                    <td>20/Oct/2022</td>
+                    <td>
+                      <span class="badge bg-primary">Incidencia</span>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#showIncident"
+                        class="btn btn-warning"
+                      >
+                        <i class="bi bi-exclamation-triangle"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Martinez Molina</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-info">Bloqueada</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Cantoran Molina</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-success">Limpia</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Arce Salgado</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-danger">Sucia</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Cabrera Allende</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-success">Limpia</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Araujo Meza</td>
+                    <td>20/Oct/2022</td>
+                    <td>
+                      <span class="badge bg-primary">Incidencia</span>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#showIncident"
+                        class="btn btn-warning"
+                      >
+                        <i class="bi bi-exclamation-triangle"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Martinez Molina</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-info">Bloqueada</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Cantoran Molina</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-success">Limpia</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Arce Salgado</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-danger">Sucia</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Cabrera Allende</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-success">Limpia</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Araujo Meza</td>
+                    <td>20/Oct/2022</td>
+                    <td>
+                      <span class="badge bg-primary">Incidencia</span>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#showIncident"
+                        class="btn btn-warning"
+                      >
+                        <i class="bi bi-exclamation-triangle"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Martinez Molina</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-info">Bloqueada</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Cantoran Molina</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-success">Limpia</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Arce Salgado</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-danger">Sucia</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Cabrera Allende</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-success">Limpia</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Araujo Meza</td>
+                    <td>20/Oct/2022</td>
+                    <td>
+                      <span class="badge bg-primary">Incidencia</span>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#showIncident"
+                        class="btn btn-warning"
+                      >
+                        <i class="bi bi-exclamation-triangle"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Martinez Molina</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-info">Bloqueada</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Cantoran Molina</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-success">Limpia</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Arce Salgado</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-danger">Sucia</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Cabrera Allende</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-success">Limpia</span></td>
+                    <td>.</td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Araujo Meza</td>
+                    <td>20/Oct/2022</td>
+                    <td>
+                      <span class="badge bg-primary">Incidencia</span>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#showIncident"
+                        class="btn btn-warning"
+                      >
+                        <i class="bi bi-exclamation-triangle"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td scope="row"><a href="#">#2457</a></td>
+                    <td>Brandon Jacob</td>
+                    <td>Martinez Molina</td>
+                    <td>20/Oct/2022</td>
+                    <td><span class="badge bg-info">Bloqueada</span></td>
+                    <td>.</td>
+                  </tr>
+                  
+                </tbody>
+                <tfoot>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Habitación</th>
+                      <th scope="col">Camarera</th>
+                      <th scope="col">Fecha creación</th>
+                      <th scope="col">Estatus</th>
+                      <th scope="col">Opciones</th>
+                    </tr>
+                </tfoot>
+            </table>
+        
+              <!-- End Recent Sales -->
+            </div>
+          </div>
+          <!-- End Left side columns -->
+
+          <!-- Right side columns -->
+          <div class="col-lg-4">
+            <!-- Recent Activity -->
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">
+                  Estatus de habitaciones<span>| Menu</span>
+                </h5>
+
+                <div class="activity">
+                  <div class="activity-item d-flex">
+                    <div class="activite-label">1</div>
+                    <i
+                      class="bi bi-circle-fill activity-badge text-danger align-self-start"
+                    ></i>
+                    <div class="activity-content">Sucia</div>
+                  </div>
+                  <!-- End activity item-->
+
+                  <div class="activity-item d-flex">
+                    <div class="activite-label">2</div>
+                    <i
+                      class="bi bi-circle-fill activity-badge text-success align-self-start"
+                    ></i>
+                    <div class="activity-content">Limpia</div>
+                  </div>
+                  <!-- End activity item-->
+
+                  <div class="activity-item d-flex">
+                    <div class="activite-label">3</div>
+                    <i
+                      class="bi bi-circle-fill activity-badge text-primary align-self-start"
+                    ></i>
+                    <div class="activity-content">Inicidencia</div>
+                  </div>
+                  <!-- End activity item-->
+
+                  <div class="activity-item d-flex">
+                    <div class="activite-label">4</div>
+                    <i
+                      class="bi bi-circle-fill activity-badge text-info align-self-start"
+                    ></i>
+                    <div class="activity-content">Bloqueada</div>
+                  </div>
+                  <!-- End activity item-->
+                </div>
+              </div>
+            </div>
+            <!-- End Recent Activity -->
+          </div>
+          <!-- End Right side columns -->
+        </div>
+      </section>
+
+     
+    </main>
+    <!--MODAL REGISTRO CAMARERA-->
+
+    <!-- Modal para Asignación de Camarera -->
+
+    <div class="modal fade" id="verticalycentered" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Gestionar Camarera</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form class="center">
+              <div class="mb-3">
+                <label for="inputText" class="col col-form-label"
+                  >Camarera</label
+                >
+                <div class="col-sm-10">
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                  >
+                    <option selected>Selecciona un Camarera</option>
+                    <option value="1">Sofia</option>
+                    <option value="2">Laura</option>
+                    <option value="3">Fernanda</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="inputEmail" class="col col-form-label"
+                  >Edificio</label
+                >
+                <div class="col-sm-10">
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                  >
+                    <option selected>Selecciona un Edificio</option>
+                    <option value="1">UTEZ</option>
+                    <option value="2">Las bolas</option>
+                    <option value="3">Paraiso</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="inputPassword" class="col col-form-label"
+                  >Habitación</label
+                >
+                <div class="col-sm-10">
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                  >
+                    <option selected>Selecciona un Habitaciones</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button type="button" class="btn btn-primary" onclick="validarcambio()">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Modal para Asignación de Camarera-->
+
+    <!--MODAL PARA VER INCIDENCIA-->
+
+    <div class="modal fade" id="showIncident" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Incidencia en hotel</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="card">
+              <img
+                src="https://uvn-brightspot.s3.amazonaws.com/assets/vixes/imj/hogartotal/6/6-secretos-de-limpieza-de-los-hoteles-5.jpg"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title">Incidencia en Hotel</h5>
+                <p class="card-text">
+                  El día de hoy me reportaron una habitación con extrema
+                  suciedad, sin embargo al limpiarla encontré botellas de vidrio
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+            <button type="button" class="btn btn-primary">
+              Liberar incidencia
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- End Vertically centered Modal-->
+
+    <!-- Vendor JS Files -->
+    <script src="../../assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/vendor/chart.js/chart.min.js"></script>
+    <script src="../../assets/vendor/echarts/echarts.min.js"></script>
+    <script src="../../assets/vendor/quill/quill.min.js"></script>
+    <script src="../../assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="../../assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="../../assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="../../assets/js/main.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <!--SWAL ALERT-->
+    <script src="https:://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      $(document).ready(function () {
+    $('#example').DataTable();
+});
+    </script>
+    <script>
+      function validarcambio() {
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
