@@ -49,13 +49,16 @@ let getRoomsByUserByStatusAssigned = (idBuilding, idStatus) => {
     }).then(response => response.json())
         .then(data => {
             let content = ``;
-            console.log(data);
+            let classBoostrap = ""
             if (data.data.length === 0) {
                 content += `
                     <div class="alert alert-primary" role="alert">
                         No hay habitaciones asignadas o sucias
                     </div>
                 `
+                classBoostrap = "message-assigned"
+            }else{
+                classBoostrap = "card-rooms-with-status-assigned"
             }
             for (let item of data.data) {
                 content += ` 
@@ -103,7 +106,7 @@ let getRoomsByUserByStatusAssigned = (idBuilding, idStatus) => {
             `;
             }
             // Setting innerHTML as content variable
-            document.getElementById("card-rooms-with-status-assigned").innerHTML = content;
+            document.getElementById(classBoostrap).innerHTML = content;
         })
 }
 
@@ -118,6 +121,17 @@ let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
     }).then(response => response.json())
         .then(data => {
             let content = ``;
+            let classBoostrap = ""
+            if (data.data.length === 0) {
+                content += `
+                    <div class="alert alert-primary" role="alert">
+                        No hay habitaciones bloqueadas
+                    </div>
+                `
+                classBoostrap = "message-blocked"
+            }else{
+                classBoostrap = "card-rooms-with-status-blocked"
+            }
             listRooms = data.data
             for (let item of data.data) {
                 content += ` 
@@ -158,7 +172,7 @@ let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
             `;
             }
             // Setting innerHTML as content variable
-            document.getElementById("card-rooms-with-status-blocked").innerHTML = content;
+            document.getElementById(classBoostrap).innerHTML = content;
         })
 }
 
@@ -174,6 +188,17 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
     }).then(response => response.json())
         .then(data => {
             let content = ``;
+            let classBoostrap = ""
+            if (data.data.length === 0) {
+                content += `
+                    <div class="alert alert-primary" role="alert">
+                        No hay habitaciones limpias
+                    </div>
+                `
+                classBoostrap = "message-released"
+            }else{
+                classBoostrap = "card-rooms-with-status-released"
+            }
             for (let item of data.data) {
                 content += ` 
                 <div class="cards-grid habitaciones">
@@ -201,7 +226,7 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
             `;
             }
             // Setting innerHTML as content variable
-            document.getElementById("card-rooms-with-status-released").innerHTML = content;
+            document.getElementById(classBoostrap).innerHTML = content;
         })
 }
 
