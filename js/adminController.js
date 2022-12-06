@@ -81,14 +81,14 @@ let setTable = () =>{
                     switch (item.status_cleaning_id) {
                         case 1:
                             content += `
-                                <td>
-                                    <span class="badge bg-primary">Limpia</span>
-                                </td>`
-                            break;
+                                    <td>
+                                        <span class="badge bg-warning">Sucia</span>
+                                    </td>`
+                                    break;
                         case 2:
                             content += `
                                 <td>
-                                    <span class="badge bg-warning">Sucia</span>
+                                    <span class="badge bg-primary">Limpia</span>
                                 </td>`
                             break;
                         case 3:
@@ -111,18 +111,115 @@ let setTable = () =>{
                         content += `
                         <td>
                             <button type="button" data-bs-toggle="modal" data-bs-target="#showIncident"
-                                class="btn btn-warning" onClick="fillModal()">
+                                class="btn btn-warning" onClick="fillModal(${item.id})">
                                 <i class="bi bi-exclamation-triangle"></i>
                             </button>
                         </td>`
+                    }else{
+                        content += `<td><span class="badge bg-secondary">Sin acción</span></td>`
                     }
                     content += `</tr>`
             }
             // Setting innerHTML as content variable
             document.getElementById("table-admin").innerHTML = content;
+            setTimeout(executeDataTable, 10)
         })
 }
 
-let fillModal = () =>{
-    console.log("Aquí se llena el modal");
+let fillModal = (idRoom) =>{
+    let imgIncidence = document.querySelector("#img-incidence")
+    let titleIncidence = document.getElementById('title-incidence')
+    let observations = document.getElementById('observations')
+    let date = document.getElementById('date')
+    let dateFull 
+
+    fetch(`http://${host}:8000/api/room/getUserHasRoomById/${idRoom}`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + token,
+        },
+    }).then(response => response.json())
+        .then(data => {
+            dateFull = data.data[0].ended != null ? data.data[0].ended : data.data[0].started
+            imgIncidence.src = data.data[0].evidence
+            titleIncidence.textContent = 'Habitación ' + data.data[0].number + ', piso ' + data.data[0].floor
+            observations.textContent = data.data[0].observations
+            date.textContent = getDatetime(new Date(dateFull)) + '  a las  ' + new Date(dateFull).toLocaleTimeString() + ' hrs'
+        })
+}
+
+let userVal
+let roomVal
+
+let selectUser = document.getElementById('select-camarera');
+selectUser.addEventListener('change',
+function(){
+    let selectedOption = this.options[selectUser.selectedIndex]
+    userVal = selectedOption.value
+});
+
+let selectRoom = document.getElementById('select-room');
+selectRoom.addEventListener('change',
+function(){
+    let selectedOption = this.options[selectRoom.selectedIndex]
+    roomVal = selectedOption.value
+});
+
+let save = () =>{
+    if (userVal && roomVal) {
+        let data = {
+            users_id:userVal,
+            rooms_id:roomVal,
+            status_cleaning_id:1
+        }
+    
+        Swal.fire({
+          title: "Estás seguro de realizar esta acción?",
+          text: "Se registará una nueva asignación!",
+          icon: "info",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Guardar",
+          cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://${host}:8000/api/room/assignRoom`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    Authorization: "Bearer " + token,
+                },
+                body: JSON.stringify(data)
+                }).then(response => response.json())
+                    .then(dataRes => {
+                        Swal.fire("¡Éxito!", "Se registro la asignación", "success");
+                        $('#verticalycentered').modal('hide')
+                        setOptionsRoom()
+                        setOptionsCamarera()
+                        $("#example").dataTable().fnDestroy();
+                        setTable()
+                    })
+            }
+        });  
+    } else {
+        Swal.fire("¡Error!", "Hay campos vacíos o erróneos ", "error");
+    }
+}
+
+let releaseRoom = () =>{
+    console.log('liberar habitación');
+}
+
+
+function executeDataTable() {
+    $("#example").DataTable({
+        language: {
+            url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json",
+        },
+       
+    });
 }

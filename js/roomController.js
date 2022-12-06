@@ -445,7 +445,7 @@ let setHistory = async (idRoom) => {
             for (let item of data.data) {
                 dateFull = item.started != null ? item.started : item.ended
                 dateFormat = getDatetime(new Date(dateFull))
-                dateLocal = new Date(item.started).toLocaleTimeString()
+                dateLocal = new Date(dateFull).toLocaleTimeString()
                 content += ` 
                 <tr>
                     <td>${dateFormat}</td>
