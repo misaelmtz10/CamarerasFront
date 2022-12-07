@@ -53,7 +53,7 @@ async function Registrar() {
                     icon: "success",
                     button: "ok",
                 });
-                setTimeout(function () { window.location.href = "http://localhost:8080/"; }, 3000);
+                setTimeout(function () { window.location.href = "http://localhost:8080/"; }, 200);
             } else {
                 swal({
                     title: "Error!",
@@ -64,7 +64,7 @@ async function Registrar() {
             }
         }
     } catch (error) {
-        alert(error);
+        console.log(error);
     }
 
 }
@@ -107,7 +107,7 @@ async function login() {
             }
         }
     } catch (error) {
-        alert(error);
+        console.log(error);
     }
 
 }
@@ -152,5 +152,5 @@ async function signOut (){
         });
     }
     localStorage.removeItem("myToken")
-    setTimeout(function () { window.location.href = "http://localhost:8080/"; }, 500);
+    setTimeout(function () { window.location.href = "http://localhost:8080/"; }, 200);
 }

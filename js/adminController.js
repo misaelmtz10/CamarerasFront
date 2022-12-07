@@ -1,7 +1,5 @@
 window.onload = function () {
-    setOptionsCamarera()
-    setOptionsRoom()
-    setTable()
+    verifySession()
 }
 
 let token = localStorage.getItem("myToken")
@@ -39,7 +37,7 @@ let setOptionsRoom = () =>{
             $('#select-room').empty();
             $('#select-room').append('<option selected disabled="disabled" value="">'+'Selecciona una habitación'+'</option>');
             for (let item of data.data) {
-                $('#select-room').append('<option value="' + item.id + '">' + item.number + '</option>');
+                $('#select-room').append('<option value="' + item.id + '">' + 'Habitación ' + item.number + ', piso ' + item.floor + '</option>');
             }
         })
 }
@@ -126,6 +124,10 @@ let setTable = () =>{
         })
 }
 
+let idRoomIn = document.getElementById('idRoom')
+let idUserIn = document.getElementById('idUser')
+let idUHRIn = document.getElementById('idUHR')
+
 let fillModal = (idRoom) =>{
     let imgIncidence = document.querySelector("#img-incidence")
     let titleIncidence = document.getElementById('title-incidence')
@@ -147,6 +149,9 @@ let fillModal = (idRoom) =>{
             titleIncidence.textContent = 'Habitación ' + data.data[0].number + ', piso ' + data.data[0].floor
             observations.textContent = data.data[0].observations
             date.textContent = getDatetime(new Date(dateFull)) + '  a las  ' + new Date(dateFull).toLocaleTimeString() + ' hrs'
+            idRoomIn.value = data.data[0].rooms_id
+            idUserIn.value = data.data[0].users_id
+            idUHRIn.value = data.data[0].id
         })
 }
 
@@ -196,13 +201,21 @@ let save = () =>{
                 body: JSON.stringify(data)
                 }).then(response => response.json())
                     .then(dataRes => {
-                        Swal.fire("¡Éxito!", "Se registro la asignación", "success");
-                        $('#verticalycentered').modal('hide')
-                        setOptionsRoom()
-                        setOptionsCamarera()
-                        $("#example").dataTable().fnDestroy();
-                        setTable()
-                    })
+                        if (dataRes.message.includes('successfully')) {
+                            Swal.fire("¡Éxito!", "Se registro la asignación", "success");
+                            $('#verticalycentered').modal('hide')
+                            setOptionsRoom()
+                            setOptionsCamarera()
+                            $("#example").dataTable().fnDestroy();
+                            setTable()
+                            userVal = null
+                            roomVal = null
+                        }else{
+                            Swal.fire("Error!", "Algo salió mal, intenta nuevamente", "error")
+                        }
+                    }).catch((error =>{ console.log(error);
+                        Swal.fire("Error!", "Algo salió mal, intenta nuevamente", "error")
+                    }))
             }
         });  
     } else {
@@ -211,7 +224,47 @@ let save = () =>{
 }
 
 let releaseRoom = () =>{
-    console.log('liberar habitación');
+
+    let data = {
+        users_id:idUserIn.value,
+        rooms_id:idRoomIn.value,
+        status_cleaning_id:3
+    }
+
+    Swal.fire({
+        title: "Estás seguro de realizar esta acción?",
+        text: "Se liberará la habitación!",
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Liberar",
+        cancelButtonText: "Cancelar"
+      }).then((result) => {
+          if (result.isConfirmed) {
+              fetch(`http://${host}:8000/api/room/updateRoom/${idUHRIn.value}`, {
+              method: 'PUT',
+              headers: {
+                  "Content-Type": "application/json",
+                  Accept: "application/json",
+                  Authorization: "Bearer " + token,
+              },
+              body: JSON.stringify(data)
+              }).then(response => response.json())
+                  .then(dataRes => {
+                        if (dataRes.message.includes('successfully')) {
+                            Swal.fire("¡Éxito!", "Se liberó la habitación", "success");
+                            $('#showIncident').modal('hide')
+                            $("#example").dataTable().fnDestroy();
+                            setTable()
+                        }else{
+                            Swal.fire("Error!", "Algo salió mal, intenta nuevamente", "error")
+                        }
+                  }).catch((error =>{ console.log(error);
+                        Swal.fire("Error!", "Algo salió mal, intenta nuevamente", "error")
+                  }))
+          }
+      });  
 }
 
 

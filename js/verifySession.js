@@ -19,8 +19,11 @@ let verifySession = async () => {
             getRoomsByUserByStatusAssigned(id, 1)
             getRoomsByUserByStatusBlocked(id, 4)
             getRoomsByUserByStatusReleased(id, 2)
-        }else if (path.includes('registerCamarera.html')) {
+        }else if (path.includes('admindashboard.html')) {
             //aquí van las acciones para admin
+            setOptionsCamarera()
+            setOptionsRoom()
+            setTable()
         }else{
             window.location.href = "http://localhost:8080/"
         }
