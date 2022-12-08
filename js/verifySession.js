@@ -18,7 +18,7 @@ let verifySession = async () => {
             const id = params.get("id")
             getRoomsByUserByStatusAssigned(id, 1)
             getRoomsByUserByStatusBlocked(id, 4)
-            getRoomsByUserByStatusReleased(id, 2)
+            getRoomsByUserByStatusCleaned(id, 2)
         }else if (path.includes('admindashboard.html')) {
             //aquí van las acciones para admin
             setOptionsCamarera()

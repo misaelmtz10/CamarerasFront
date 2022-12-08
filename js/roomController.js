@@ -49,17 +49,8 @@ let getRoomsByUserByStatusAssigned = (idBuilding, idStatus) => {
     }).then(response => response.json())
         .then(data => {
             let content = ``;
-            let classBoostrap = ""
-            if (data.data.length === 0) {
-                content += `
-                    <div class="alert alert-primary" role="alert">
-                        No hay habitaciones asignadas o sucias
-                    </div>
-                `
-                classBoostrap = "message-assigned"
-            }else{
-                classBoostrap = "card-rooms-with-status-assigned"
-            }
+            let contentMessage = ""
+            
             for (let item of data.data) {
                 content += ` 
                 <div class="cards-grid habitaciones">
@@ -106,7 +97,16 @@ let getRoomsByUserByStatusAssigned = (idBuilding, idStatus) => {
             `;
             }
             // Setting innerHTML as content variable
-            document.getElementById(classBoostrap).innerHTML = content;
+            document.getElementById('card-rooms-with-status-assigned').innerHTML = content;
+
+            if (data.data.length === 0) {
+                contentMessage += `
+                    <div class="alert alert-primary" role="alert">
+                        No hay habitaciones asignadas o sucias
+                    </div>
+                `
+                document.getElementById('message-assigned').innerHTML = contentMessage;
+            }
         })
 }
 
@@ -121,17 +121,8 @@ let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
     }).then(response => response.json())
         .then(data => {
             let content = ``;
-            let classBoostrap = ""
-            if (data.data.length === 0) {
-                content += `
-                    <div class="alert alert-primary" role="alert">
-                        No hay habitaciones bloqueadas
-                    </div>
-                `
-                classBoostrap = "message-blocked"
-            }else{
-                classBoostrap = "card-rooms-with-status-blocked"
-            }
+            let contentMessage = ""
+            
             listRooms = data.data
             for (let item of data.data) {
                 content += ` 
@@ -172,11 +163,20 @@ let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
             `;
             }
             // Setting innerHTML as content variable
-            document.getElementById(classBoostrap).innerHTML = content;
+            document.getElementById('card-rooms-with-status-blocked').innerHTML = content;
+
+            if (data.data.length === 0) {
+                contentMessage += `
+                    <div class="alert alert-primary" role="alert">
+                        No hay habitaciones bloqueadas
+                    </div>
+                `
+                document.getElementById('message-blocked').innerHTML = contentMessage;
+            }
         })
 }
 
-let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
+let getRoomsByUserByStatusCleaned = (idBuilding, idStatus) => {
 
     fetch(`http://${host}:8000/api/room/getAllByUser/${idBuilding}/${idStatus}`, {
         method: 'GET',
@@ -188,17 +188,8 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
     }).then(response => response.json())
         .then(data => {
             let content = ``;
-            let classBoostrap = ""
-            if (data.data.length === 0) {
-                content += `
-                    <div class="alert alert-primary" role="alert">
-                        No hay habitaciones limpias
-                    </div>
-                `
-                classBoostrap = "message-released"
-            }else{
-                classBoostrap = "card-rooms-with-status-released"
-            }
+            let contentMessage = ""
+            
             for (let item of data.data) {
                 content += ` 
                 <div class="cards-grid habitaciones">
@@ -226,8 +217,35 @@ let getRoomsByUserByStatusReleased = (idBuilding, idStatus) => {
             `;
             }
             // Setting innerHTML as content variable
-            document.getElementById(classBoostrap).innerHTML = content;
+            document.getElementById('card-rooms-with-status-released').innerHTML = content;
+
+            if (data.data.length === 0) {
+                contentMessage += `
+                    <div class="alert alert-primary" role="alert">
+                        No hay habitaciones limpias
+                    </div>
+                `
+                document.getElementById('message-cleaned').innerHTML = contentMessage;
+            }
         })
+}
+
+let formatLocalDate = () => {
+    var now = new Date(),
+        tzo = -now.getTimezoneOffset(),
+        dif = tzo >= 0 ? '+' : '-',
+        pad = function(num) {
+            var norm = Math.abs(Math.floor(num));
+            return (norm < 10 ? '0' : '') + norm;
+        };
+    return now.getFullYear() 
+        + '-' + pad(now.getMonth()+1)
+        + '-' + pad(now.getDate())
+        + 'T' + pad(now.getHours())
+        + ':' + pad(now.getMinutes()) 
+        + ':' + pad(now.getSeconds()) 
+        + dif + pad(tzo / 60) 
+        + ':' + pad(tzo % 60)
 }
 
 //Alertas
@@ -240,12 +258,9 @@ let openModal = (id, estatus) => {
         document.querySelector("#video").setAttribute("style", "display: none;");
     }
 
-    const date = Date.now()
-    const today = new Date(date)
-
     let data = {
-        started: today.toISOString(),
-        ended: today.toISOString(),
+        started: formatLocalDate(),
+        ended: formatLocalDate(),
     }
 
     setDataFromBtn(id, data, false)
@@ -265,7 +280,7 @@ let showDetails = (params, estatus) => {
     const photoStr = roomJSON.evidence
     imgactualizada.src = photoStr
     let data = {
-        observations: observationsIn,
+        observations: observationsIn.value,
         evidence: picture != null ? picture : roomJSON.evidence
     }
 
@@ -276,7 +291,7 @@ let setDataFromBtn = (id, data, isUpdate) => {
     let btnSend = document.querySelector("#send-incidences")
     btnSend.addEventListener("click", () => {
         let observationsIn = document.getElementById('observationsIn').value
-        if (observationsIn && picture) {
+        if (observationsIn && (picture || data.evidence)) {
             Swal.fire({
                 title: 'Estas seguro?',
                 text: "¡No podrás revertir esto!",
@@ -291,6 +306,8 @@ let setDataFromBtn = (id, data, isUpdate) => {
                     if (isUpdate) {
                         data.evidence = data.evidence != null ? data.evidence : picture
                         data.observations = observationsIn
+                        data.started = formatLocalDate(),
+                        data.ended = formatLocalDate()
                     } else {
                         let newData = {
                             started: data.started,
@@ -303,23 +320,28 @@ let setDataFromBtn = (id, data, isUpdate) => {
                     }
                     //data.observations = observationsIn
                     const resultRequest = setIncidence(id, data).then((dataRes) => {
-                        if (dataRes.data) {
-                            if (isUpdate) {
-                                Swal.fire('Actualización éxitosa!', '', 'success')
+                        if (navigator.onLine) {
+                            if (dataRes.data) {
+                                if (isUpdate) {
+                                    Swal.fire('Actualización éxitosa!', '', 'success')
+                                } else {
+                                    Swal.fire('Registro éxitoso!', '', 'success')
+                                }
+                                
                             } else {
-                                Swal.fire('Registro éxitoso!', '', 'success')
-                            }
-                            $('#observationsIn').val('')
-                            $('#photo').attr("src", "");
-                            $('#basicExampleModal').modal('hide')
-                            const params = new URLSearchParams(document.location.search)
-                            const id = params.get("id")
-                            getRoomsByUserByStatusBlocked(id, 4)
-                            getRoomsByUserByStatusAssigned(id, 1)
-                            getRoomsByUserByStatusReleased(id, 2)
+                                Swal.fire('¡Algo ocurrió, intenta de nuevo!', '', 'error')
+                            }     
                         } else {
-                            Swal.fire('¡Algo ocurrió, intenta de nuevo!', '', 'error')
+                            Swal.fire('¡Estás en modo offline!', 'Cuando recuperes la red, se sincronizará la petición', 'info')   
                         }
+                        
+                        $('#observationsIn').val('')
+                        $('#photo').attr("src", "");
+                        $('#basicExampleModal').modal('hide')
+                        const params = new URLSearchParams(document.location.search)
+                        const id = params.get("id")
+                        getRoomsByUserByStatusAssigned(id, 1)
+                        getRoomsByUserByStatusBlocked(id, 4)
 
                     }).catch((error) => {
                         console.log(error);
@@ -380,12 +402,11 @@ let limpiar = (id) => {
                 if (result.dismiss === Swal.DismissReason.timer) {
                     const resultRequest = changeStatusRoom(id).then((data) => {
                         if (data.data) {
-                            Swal.fire('¡Envío éxitoso!', '', 'success')
                             const params = new URLSearchParams(document.location.search)
                             const id = params.get("id")
-                            getRoomsByUserByStatusBlocked(id, 4)
                             getRoomsByUserByStatusAssigned(id, 1)
-                            getRoomsByUserByStatusReleased(id, 2)
+                            getRoomsByUserByStatusCleaned(id, 2)
+                            Swal.fire('¡Envío éxitoso!', '', 'success')
                         } else {
                             Swal.fire('¡Algo ocurrió, intenta de nuevo!', '', 'error')
                         }
@@ -401,11 +422,10 @@ let limpiar = (id) => {
 }
 
 let changeStatusRoom = async (id) => {
-    const date = Date.now()
-    const today = new Date(date)
+
     let data = {
-        started: today.toISOString(),
-        ended: today.toISOString(),
+        started: formatLocalDate(),
+        ended: formatLocalDate(),
         status_cleaning_id: 2
     }
     const request = await fetch(`http://${host}:8000/api/room/updateRoom/${id}`, {
