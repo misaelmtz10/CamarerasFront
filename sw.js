@@ -45,6 +45,7 @@ self.addEventListener('install', (event) => {
             '/js/edit.js',
             '/js/roomController.js',
             '/js/verifySession.js',
+            '/js/verifyConexion.js',
             '/img/lock.png',
             '/img/icono-login.png',
             '/img/icono-registro.png',
@@ -107,7 +108,7 @@ self.addEventListener('fetch', (event) => {
             })
 
         event.respondWith(genericResponse)
-    } else {
+    } else{
         event.respondWith(
             fetch(event.request)
                 .then((networkResponse) => {
@@ -147,6 +148,7 @@ self.addEventListener('fetch', (event) => {
                 })
 
             })
+
         )
     }
 })

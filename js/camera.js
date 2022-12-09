@@ -10,7 +10,7 @@ class Camera{
             video:{
                 width:300,
                 height:300,
-                facingMode: { exact: "user" }
+                facingMode: { exact: "environment" }
             }
         }
       ).then((stream)=>{

@@ -1,7 +1,6 @@
 const db = new PouchDB("offlinePost");
 
 function savePostOffline(body, url, method, session) {
-    console.log('llega a save off');
     return db.post({ body: body, url: url, method: method, token: session }).then((pouchResponse) => {
         return new Response(JSON.stringify(pouchResponse));
     })

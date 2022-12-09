@@ -35,8 +35,10 @@ btnTakePhoto.addEventListener("click", () => {
 })
 
 window.onload = function () {
+    ubication = "room"
     verifySession()
 }
+
 
 let getRoomsByUserByStatusAssigned = (idBuilding, idStatus) => {
     fetch(`http://${host}:8000/api/room/getAllByUser/${idBuilding}/${idStatus}`, {
@@ -320,29 +322,26 @@ let setDataFromBtn = (id, data, isUpdate) => {
                     }
                     //data.observations = observationsIn
                     const resultRequest = setIncidence(id, data).then((dataRes) => {
-                        if (navigator.onLine) {
-                            if (dataRes.data) {
-                                if (isUpdate) {
-                                    Swal.fire('Actualización éxitosa!', '', 'success')
-                                } else {
-                                    Swal.fire('Registro éxitoso!', '', 'success')
-                                }
-                                
+                        if (dataRes.data) {
+                            if (isUpdate) {
+                                Swal.fire('Actualización éxitosa!', '', 'success')
                             } else {
-                                Swal.fire('¡Algo ocurrió, intenta de nuevo!', '', 'error')
-                            }     
+                                Swal.fire('Registro éxitoso!', '', 'success')
+                            }
+                            $('#observationsIn').val('')
+                            $('#photo').attr("src", "");
+                            $('#basicExampleModal').modal('hide')
+                            const params = new URLSearchParams(document.location.search)
+                            const id = params.get("id")
+                            getRoomsByUserByStatusAssigned(id, 1)
+                            getRoomsByUserByStatusBlocked(id, 4)
                         } else {
-                            Swal.fire('¡Estás en modo offline!', 'Cuando recuperes la red, se sincronizará la petición', 'info')   
-                        }
-                        
-                        $('#observationsIn').val('')
-                        $('#photo').attr("src", "");
-                        $('#basicExampleModal').modal('hide')
-                        const params = new URLSearchParams(document.location.search)
-                        const id = params.get("id")
-                        getRoomsByUserByStatusAssigned(id, 1)
-                        getRoomsByUserByStatusBlocked(id, 4)
-
+                            if (navigator.onLine) {
+                                Swal.fire('¡Algo ocurrió, intenta de nuevo!', '', 'error')
+                            } else {
+                                Swal.fire('¡Estás en modo offline!', 'Cuando recuperes la red, se sincronizará la petición', 'info')   
+                            }
+                        }     
                     }).catch((error) => {
                         console.log(error);
                     })

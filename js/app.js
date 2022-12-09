@@ -1,4 +1,5 @@
-let host = "localhost"
+let host = "192.168.43.200"
+let ubication = ""
 
 if (navigator.serviceWorker) {
     navigator.serviceWorker.register('/sw.js');
@@ -16,24 +17,5 @@ const Toast = Swal.mixin({
     }
 })
 
-const isOnline = async () => 
-{
-  if(navigator.onLine)
-  {
-    Toast.fire({
-        icon: 'success',
-        title: 'De vuelta en línea'
-      })
-  }else{
-    Toast.fire({
-        icon: 'warning',
-        title: 'Entraste a modo offline'
-      })
-  }
-}
-
-
-window.addEventListener('online', isOnline)
-window.addEventListener('offline', isOnline)
 
 
