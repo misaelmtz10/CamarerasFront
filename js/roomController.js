@@ -328,20 +328,20 @@ let setDataFromBtn = (id, data, isUpdate) => {
                             } else {
                                 Swal.fire('Registro éxitoso!', '', 'success')
                             }
-                            $('#observationsIn').val('')
-                            $('#photo').attr("src", "");
-                            $('#basicExampleModal').modal('hide')
-                            const params = new URLSearchParams(document.location.search)
-                            const id = params.get("id")
-                            getRoomsByUserByStatusAssigned(id, 1)
-                            getRoomsByUserByStatusBlocked(id, 4)
                         } else {
                             if (navigator.onLine) {
                                 Swal.fire('¡Algo ocurrió, intenta de nuevo!', '', 'error')
                             } else {
                                 Swal.fire('¡Estás en modo offline!', 'Cuando recuperes la red, se sincronizará la petición', 'info')   
                             }
-                        }     
+                        } 
+                        $('#observationsIn').val('')
+                        $('#photo').attr("src", "");
+                        $('#basicExampleModal').modal('hide')
+                        const params = new URLSearchParams(document.location.search)
+                        const id = params.get("id")
+                        getRoomsByUserByStatusAssigned(id, 1)
+                        getRoomsByUserByStatusBlocked(id, 4)   
                     }).catch((error) => {
                         console.log(error);
                     })
