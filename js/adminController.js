@@ -5,7 +5,7 @@ window.onload = function () {
 let token = localStorage.getItem("myToken")
 
 let setOptionsCamarera = () =>{
-    fetch(`http://${host}:8000/api/user/getAllUsers`, {
+    fetch(`${host}/api/user/getAllUsers`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json",
@@ -24,7 +24,7 @@ let setOptionsCamarera = () =>{
 }
 
 let setOptionsRoom = () =>{
-    fetch(`http://${host}:8000/api/room/getAllRooms`, {
+    fetch(`${host}/api/room/getAllRooms`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json",
@@ -52,7 +52,7 @@ const getDatetime = (d) => {
 };
 
 let setTable = () =>{
-    fetch(`http://${host}:8000/api/room/getAllForAdmin`, {
+    fetch(`${host}/api/room/getAllForAdmin`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json",
@@ -135,7 +135,7 @@ let fillModal = (idRoom) =>{
     let date = document.getElementById('date')
     let dateFull 
 
-    fetch(`http://${host}:8000/api/room/getUserHasRoomById/${idRoom}`, {
+    fetch(`${host}/api/room/getUserHasRoomById/${idRoom}`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json",
@@ -191,7 +191,7 @@ let save = () =>{
           cancelButtonText: "Cancelar"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://${host}:8000/api/room/assignRoom`, {
+                fetch(`${host}/api/room/assignRoom`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -242,7 +242,7 @@ let releaseRoom = () =>{
         cancelButtonText: "Cancelar"
       }).then((result) => {
           if (result.isConfirmed) {
-              fetch(`http://${host}:8000/api/room/updateRoom/${idUHRIn.value}`, {
+              fetch(`${host}/api/room/updateRoom/${idUHRIn.value}`, {
               method: 'PUT',
               headers: {
                   "Content-Type": "application/json",

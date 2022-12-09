@@ -41,7 +41,7 @@ window.onload = function () {
 
 
 let getRoomsByUserByStatusAssigned = (idBuilding, idStatus) => {
-    fetch(`http://${host}:8000/api/room/getAllByUser/${idBuilding}/${idStatus}`, {
+    fetch(`${host}/api/room/getAllByUser/${idBuilding}/${idStatus}`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json",
@@ -113,7 +113,7 @@ let getRoomsByUserByStatusAssigned = (idBuilding, idStatus) => {
 }
 
 let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
-    fetch(`http://${host}:8000/api/room/getAllByUser/${idBuilding}/${idStatus}`, {
+    fetch(`${host}/api/room/getAllByUser/${idBuilding}/${idStatus}`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json",
@@ -180,7 +180,7 @@ let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
 
 let getRoomsByUserByStatusCleaned = (idBuilding, idStatus) => {
 
-    fetch(`http://${host}:8000/api/room/getAllByUser/${idBuilding}/${idStatus}`, {
+    fetch(`${host}/api/room/getAllByUser/${idBuilding}/${idStatus}`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json",
@@ -357,7 +357,7 @@ let setDataFromBtn = (id, data, isUpdate) => {
 
 let setIncidence = async (id, data) => {
 
-    const request = await fetch(`http://${host}:8000/api/room/updateRoom/${id}`, {
+    const request = await fetch(`${host}/api/room/updateRoom/${id}`, {
         method: 'PUT',
         headers: {
             "Content-Type": "application/json",
@@ -427,7 +427,7 @@ let changeStatusRoom = async (id) => {
         ended: formatLocalDate(),
         status_cleaning_id: 2
     }
-    const request = await fetch(`http://${host}:8000/api/room/updateRoom/${id}`, {
+    const request = await fetch(`${host}/api/room/updateRoom/${id}`, {
         method: 'PUT',
         headers: {
             "Content-Type": "application/json",
@@ -448,7 +448,7 @@ const getDatetime = (d) => {
 };
 
 let setHistory = async (idRoom) => {
-    fetch(`http://${host}:8000/api/room/getAllByRoomId/${idRoom}`, {
+    fetch(`${host}/api/room/getAllByRoomId/${idRoom}`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json",

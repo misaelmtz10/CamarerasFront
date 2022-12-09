@@ -38,7 +38,7 @@ async function Registrar() {
                 button: "Ok",
             });
         } else {
-            const request = await fetch(`http://${host}:8000/api/register`, {
+            const request = await fetch(`${host}/api/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;'
@@ -86,7 +86,7 @@ async function login() {
                 button: "Ok",
             });
         } else {
-            const request = await fetch(`http://${host}:8000/api/login`, {
+            const request = await fetch(`${host}/api/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;'
@@ -114,7 +114,7 @@ async function login() {
 
 let redirectLikeRole = async () =>{
     let token = localStorage.getItem("myToken")
-    const request = await fetch(`http://${host}:8000/api/userProfile`, {
+    const request = await fetch(`${host}/api/userProfile`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json",
@@ -133,7 +133,7 @@ let redirectLikeRole = async () =>{
 
 async function signOut (){
     let token = localStorage.getItem("myToken")
-    const request = await fetch(`http://${host}:8000/api/logout`, {
+    const request = await fetch(`${host}/api/logout`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json",

@@ -4,7 +4,7 @@ window.onload = function () {
 }
 
 let getBuildingsByUser = () => {
-    fetch(`http://${host}:8000/api/building/getAllBelongUser`, {
+    fetch(`${host}/api/building/getAllBelongUser`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json",

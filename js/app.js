@@ -1,4 +1,4 @@
-let host = "192.168.43.200"
+let host = "https://camarerasapi.up.railway.app"
 let ubication = ""
 
 if (navigator.serviceWorker) {
