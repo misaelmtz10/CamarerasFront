@@ -303,10 +303,11 @@ let setDataFromBtn = (id, data, isUpdate) => {
                 confirmButtonText: 'Enviar',
                 denyButtonText: `Cancelar`,
             }).then((result) => {
-
+                //RELOAD SPINNER
+                document.querySelector(".theme-loader").setAttribute("style", "display: initial !important; ");
                 if (result.isConfirmed) {
-                    if (isUpdate) {
-                        data.evidence = data.evidence != null ? data.evidence : picture
+                     if (isUpdate) {
+                         data.evidence = data.evidence != null ? data.evidence : picture
                         data.observations = observationsIn
                         data.started = formatLocalDate(),
                         data.ended = formatLocalDate()
@@ -323,12 +324,16 @@ let setDataFromBtn = (id, data, isUpdate) => {
                     //data.observations = observationsIn
                     const resultRequest = setIncidence(id, data).then((dataRes) => {
                         if (dataRes.data) {
+                             document.querySelector(".theme-loader").setAttribute("style", "display: none !important; ");
+                          
                             if (isUpdate) {
-                                Swal.fire('Actualización éxitosa!', '', 'success')
+                                     Swal.fire('Actualización éxitosa!', '', 'success')
                             } else {
-                                Swal.fire('Registro éxitoso!', '', 'success')
+                                   Swal.fire('Registro éxitoso!', '', 'success')
                             }
                         } else {
+                            document.querySelector(".theme-loader").setAttribute("style", "display: none !important; ");
+                          
                             if (navigator.onLine) {
                                 Swal.fire('¡Algo ocurrió, intenta de nuevo!', '', 'error')
                             } else {
@@ -379,9 +384,10 @@ let limpiar = (id) => {
         cancelButtonColor: "#DD6B55",
         denyButtonText: `Cancelar`,
     }).then((result) => {
+        
         if (result.isConfirmed) {
             let timerInterval
-
+            
             Swal.fire({
                 title: 'Empezando limpieza...',
                 html: 'Tiempo <b></b> milliseconds.',
