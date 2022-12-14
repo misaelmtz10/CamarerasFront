@@ -1,5 +1,6 @@
 let host = "https://camarerasapi.up.railway.app"
 let ubication = ""
+let section = ""
 
 if (navigator.serviceWorker) {
     navigator.serviceWorker.register('/sw.js');

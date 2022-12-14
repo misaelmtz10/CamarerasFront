@@ -1,14 +1,28 @@
 const isOnline = async () => 
 {
     
-  if(navigator.onLine)
-  {
+  if(navigator.onLine){
+      console.log('isOnline');
+      document.querySelector(".theme-loader").setAttribute("style", "display: initial !important; ");
       if (ubication === "room") {
         const paramsUrl = new URLSearchParams(document.location.search)
         const idBul = paramsUrl.get("id")
-        setTimeout(() => {
-            getRoomsByUserByStatusBlocked(idBul, 4)
-        }, 2000);
+        switch (section) {
+          case "assigned":
+              getRoomsByUserByStatusAssigned(idBul,1)
+              document.querySelector(".theme-loader").setAttribute("style", "display: none !important; ");
+            break;
+          case "blocked":
+              getRoomsByUserByStatusBlocked(idBul, 4)
+              document.querySelector(".theme-loader").setAttribute("style", "display: none !important; ");
+            break;
+          case "cleaned":
+              getRoomsByUserByStatusCleaned(idBul,2)
+              document.querySelector(".theme-loader").setAttribute("style", "display: none !important; ");
+            break;
+          default:
+            break;
+        }
       }
     Toast.fire({
         icon: 'success',
@@ -21,7 +35,6 @@ const isOnline = async () =>
       })
   }
 }
-
 
 window.addEventListener('online', isOnline)
 window.addEventListener('offline', isOnline)

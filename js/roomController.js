@@ -39,6 +39,18 @@ window.onload = function () {
     verifySession()
 }
 
+let isAssigned = () =>{
+    section = "assigned"
+}
+
+let isBlocked = () =>{
+    section = "blocked"
+}
+
+let isCleaned = () =>{
+    section = "cleaned"
+}
+
 
 let getRoomsByUserByStatusAssigned = (idBuilding, idStatus) => {
     fetch(`${host}/api/room/getAllByUser/${idBuilding}/${idStatus}`, {
@@ -305,9 +317,11 @@ let setDataFromBtn = (id, data, isUpdate) => {
             }).then((result) => {
                 //RELOAD SPINNER
                 document.querySelector(".theme-loader").setAttribute("style", "display: initial !important; ");
+                console.log("data evidence " + data.evidence);
+                console.log("picture " + picture);
                 if (result.isConfirmed) {
                      if (isUpdate) {
-                         data.evidence = data.evidence != null ? data.evidence : picture
+                        data.evidence = picture != null ? picture : data.evidence
                         data.observations = observationsIn
                         data.started = formatLocalDate(),
                         data.ended = formatLocalDate()
@@ -324,12 +338,12 @@ let setDataFromBtn = (id, data, isUpdate) => {
                     //data.observations = observationsIn
                     const resultRequest = setIncidence(id, data).then((dataRes) => {
                         if (dataRes.data) {
-                             document.querySelector(".theme-loader").setAttribute("style", "display: none !important; ");
+                            document.querySelector(".theme-loader").setAttribute("style", "display: none !important; ");
                           
                             if (isUpdate) {
-                                     Swal.fire('Actualización éxitosa!', '', 'success')
+                                Swal.fire('Actualización éxitosa!', '', 'success')
                             } else {
-                                   Swal.fire('Registro éxitoso!', '', 'success')
+                                Swal.fire('Registro éxitoso!', '', 'success')
                             }
                         } else {
                             document.querySelector(".theme-loader").setAttribute("style", "display: none !important; ");
@@ -351,7 +365,8 @@ let setDataFromBtn = (id, data, isUpdate) => {
                         console.log(error);
                     })
                 } else if (result.isDenied) {
-                    Swal.fire('No se hizo ningun cambio', '', 'info')
+                    document.querySelector(".theme-loader").setAttribute("style", "display: none !important; ");
+                    //Swal.fire('No se hizo ningun cambio', '', 'info')
                 }
             })
         } else {
@@ -421,7 +436,7 @@ let limpiar = (id) => {
                 }
             })
         } else if (result.isDenied) {
-            Swal.fire('No se hizo ningun cambio', '', 'info')
+            //Swal.fire('No se hizo ningun cambio', '', 'info')
         }
     })
 }
@@ -454,6 +469,7 @@ const getDatetime = (d) => {
 };
 
 let setHistory = async (idRoom) => {
+    document.querySelector(".theme-loader").setAttribute("style", "display: initial !important; ");
     fetch(`${host}/api/room/getAllByRoomId/${idRoom}`, {
         method: 'GET',
         headers: {
@@ -464,6 +480,7 @@ let setHistory = async (idRoom) => {
     }).then(response => response.json())
         .then(data => {
             let content = ``;
+            let contentMessage = ""
             let dateFull
             let dateFormat
             let dateLocal
@@ -492,6 +509,18 @@ let setHistory = async (idRoom) => {
             }
             // Setting innerHTML as content variable
             document.getElementById("table-history").innerHTML = content;
+            if (data.data.length === 0) {
+                contentMessage += `
+                    <div class="alert alert-primary" role="alert">
+                        No hay datos en el historial
+                    </div>
+                `
+            }else{
+                contentMessage = ""
+            }
+            
+            document.getElementById('message-history').innerHTML = contentMessage;
+            document.querySelector(".theme-loader").setAttribute("style", "display: none !important; ");
         })
 }
 
