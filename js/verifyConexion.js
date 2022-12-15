@@ -3,6 +3,7 @@ const isOnline = async () =>
     
   if(navigator.onLine){
       document.querySelector(".theme-loader").setAttribute("style", "display: initial !important; ");
+      if (!ubication || !section){document.querySelector(".theme-loader").setAttribute("style", "display: none !important; ");}
       if (ubication === "room") {
         const paramsUrl = new URLSearchParams(document.location.search)
         const idBul = paramsUrl.get("id")
