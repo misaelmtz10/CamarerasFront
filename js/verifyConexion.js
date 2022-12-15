@@ -10,18 +10,22 @@ const isOnline = async () =>
         const idBul = paramsUrl.get("id")
         switch (section) {
           case "assigned":
+              console.log('entra al caso de assigned');
               getRoomsByUserByStatusAssigned(idBul,1)
               document.querySelector(".theme-loader").setAttribute("style", "display: none !important; ");
             break;
           case "blocked":
+              console.log('entra al caso de blocked');
               getRoomsByUserByStatusBlocked(idBul, 4)
               document.querySelector(".theme-loader").setAttribute("style", "display: none !important; ");
             break;
           case "cleaned":
+              console.log('entra al caso de cleaned');
               getRoomsByUserByStatusCleaned(idBul,2)
               document.querySelector(".theme-loader").setAttribute("style", "display: none !important; ");
             break;
           default:
+              console.log('entra al default');
               document.querySelector(".theme-loader").setAttribute("style", "display: none !important; ");
             break;
         }
