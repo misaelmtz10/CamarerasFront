@@ -11,19 +11,25 @@ const isOnline = async () =>
         switch (section) {
           case "assigned":
               console.log('entra al caso de assigned');
-              getRoomsByUserByStatusAssigned(idBul,1)
+              setTimeout(() => {
+                getRoomsByUserByStatusAssigned(idBul,1)
+              }, 2500);
               document.querySelector(".theme-loader").setAttribute("style", "display: none !important; ");
             break;
           case "blocked":
               console.log('entra al caso de blocked');
-              getRoomsByUserByStatusBlocked(idBul, 4)
+              setTimeout(() => {
+                getRoomsByUserByStatusBlocked(idBul, 4)
+              }, 2500);
               document.querySelector(".theme-loader").setAttribute("style", "display: none !important; ");
             break;
           case "cleaned":
               console.log('entra al caso de cleaned');
-              getRoomsByUserByStatusCleaned(idBul,2)
-              getRoomsByUserByStatusBlocked(idBul, 4)
-              getRoomsByUserByStatusAssigned(idBul,1)
+              setTimeout(() => {
+                getRoomsByUserByStatusCleaned(idBul,2),
+                getRoomsByUserByStatusBlocked(idBul, 4),
+                getRoomsByUserByStatusAssigned(idBul,1)
+              }, 2500);
               document.querySelector(".theme-loader").setAttribute("style", "display: none !important; ");
             break;
           default:
