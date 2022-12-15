@@ -27,7 +27,7 @@ let getBuildingsByUser = () => {
                             </div>
                             <div class="text-container">
                                 <h6>${item.name}</h6>
-                                <a type="button" href="/pages/camarera.html?id=${item.id}" class="btn btn-info">
+                                <a type="button" href="camarera.html?id=${item.id}" class="btn btn-info">
                                     Ver habitaciones </a>
                             </div>
                             </div>

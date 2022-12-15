@@ -1,5 +1,5 @@
 importScripts("https://cdn.jsdelivr.net/npm/pouchdb@7.3.1/dist/pouchdb.min.js")
-importScripts("/js/sw-db.js")
+importScripts("./js/sw-db.js")
 
 const STATIC_CACHE_NAME = 'static-cache-v1.1';
 const INMUTABLE_CACHE_NAME = 'inmutable-cache-v1.1';
@@ -26,38 +26,38 @@ self.addEventListener('install', (event) => {
     const respCache = caches.open(STATIC_CACHE_NAME).then((cache) => {
         return cache.addAll([
             '/',
-            '/index.html',
-            '/pages/camarera.html',
-            '/pages/history.html',
-            '/pages/edificio.html',
-            '/pages/home.html',
-            "/pages/password.html",
-            '/css/target.css',
-            '/css/home.css',
-            '/css/offline.css',
-            '/css/login.css',
-            '/css/mdb.min.css',
-            '/js/mdb.min.js',
-            'js/app.js',
-            '/js/script.js',
-            '/js/buildingController.js',
-            '/js/camera.js',
-            '/js/edit.js',
-            '/js/roomController.js',
-            '/js/verifySession.js',
-            '/js/verifyConexion.js',
-            '/img/lock.png',
-            '/img/icono-login.png',
-            '/img/icono-registro.png',
-            '/img/crown.png',
-            '/img/Corona.ico',
-            '/img/icons/android-launchericon-48-48.png',
-            '/img/icons/android-launchericon-72-72.png',
-            '/img/icons/android-launchericon-96-96.png',
-            '/img/icons/android-launchericon-192-192.png',
-            '/img/icons/android-launchericon-144-144.png',
-            '/img/icons/android-launchericon-512-512.png',
-            'manifest.json'
+            './index.html',
+            './pages/camarera.html',
+            './pages/history.html',
+            './pages/edificio.html',
+            './pages/home.html',
+            './pages/password.html',
+            './css/target.css',
+            './css/home.css',
+            './css/offline.css',
+            './css/login.css',
+            './css/mdb.min.css',
+            './js/mdb.min.js',
+            './js/app.js',
+            './js/script.js',
+            './js/buildingController.js',
+            './js/camera.js',
+            './js/edit.js',
+            './js/roomController.js',
+            './js/verifySession.js',
+            './js/verifyConexion.js',
+            './img/lock.png',
+            './img/icono-login.png',
+            './img/icono-registro.png',
+            './img/crown.png',
+            './img/Corona.ico',
+            './img/icons/android-launchericon-48-48.png',
+            './img/icons/android-launchericon-72-72.png',
+            './img/icons/android-launchericon-96-96.png',
+            './img/icons/android-launchericon-192-192.png',
+            './img/icons/android-launchericon-144-144.png',
+            './img/icons/android-launchericon-512-512.png',
+            './manifest.json'
         ])
 
     }); const respCacheInmutable = caches.open(INMUTABLE_CACHE_NAME).then((cache)=>{

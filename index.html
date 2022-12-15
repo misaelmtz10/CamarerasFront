@@ -1,55 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
   <meta name="theme_color" content="#2A4670" />
   <title>Login</title>
-  <link rel="shortcut icon" href="img/Corona.ico" />
+  <link rel="shortcut icon" href="./img/Corona.ico" />
   <!-- Font Awesome -->
-  <link rel="manifest" href="manifest.json" />
+  <link rel="manifest" href="./manifest.json" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <!-- Google Fonts Roboto -->
   <!-- MDB -->
-  <link rel="stylesheet" href="css/login.css" />
-  <link rel="stylesheet" href="css/mdb.min.css" />
-
+  <link rel="stylesheet" href="./css/login.css" />
+  <link rel="stylesheet" href="./css/mdb.min.css" />
 </head>
 
 <body>
-
   <div class="container">
     <div class="forms-container">
       <div class="signin-signup">
-        <form name="formLogin" action="/pages/home.html" class="sign-in-form">
+        <form  name="formLogin" action="/pages/home.html" class="sign-in-form">
           <h2 class="title">¡Bienvenido!</h2>
           <span class="login100-form-logo">
-            <img src="img/icono-login.png" alt="" style="width: 70%; height: 70%" />
+            <img src="./img/icono-login.png" alt="" style="width: 70%; height: 70%" />
           </span>
           <div class="input-field">
             <i class="fas fa-user"></i>
-            <input type="text" placeholder="Username" id="emaillogin" />
+            <input type="text" placeholder="Username" id="emaillogin"/>
           </div>
           <div class="input-field">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" id="passwordlogin" />
+            <input type="password" placeholder="Password" id="passwordlogin"/>
           </div>
           <button type="button" class="btn btn-primary" onclick="login()">
             Iniciar Sesión &nbsp;<i class="fa-solid fa-paper-plane"></i>
           </button>
-          <a href="/pages/password.html" id="sign-top-btn">Olvide mi contraseña</a>
+          <a href="./pages/password.html" id="sign-top-btn">Olvide mi contraseña</a>
           <div class="social-media">
             <label for=""></label>
           </div>
         </form>
-        <form name="formRegister" action="#" class="sign-up-form">
+        <form  name="formRegister" action="#" class="sign-up-form">
           <h2 class="title">Registrarte!</h2>
           <span class="login100-form-logo">
-            <img src="img/icono-registro.png" alt="" style="width: 70%; height: 70%" />
+            <img src="./img/icono-registro.png" alt="" style="width: 70%; height: 70%" />
           </span>
           <div class="input-field">
             <i class="fas fa-user"></i>
@@ -65,11 +62,11 @@
           </div>
           <div class="input-field">
             <i class="fas fa-envelope"></i>
-            <input type="email" placeholder="Email" id="email" />
+            <input type="email" placeholder="Email" id="email"/>
           </div>
           <div class="input-field">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" id="password" />
+            <input type="password" placeholder="Password"  id="password"/>
           </div>
           <div id="row" style="display: none;">
             <div>
@@ -135,9 +132,9 @@
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <script type="text/javascript" src="js/mdb.min.js"></script>
-  <script src="js/script.js"></script>
-  <script src="js/app.js"></script>
+  <script type="text/javascript" src="./js/mdb.min.js"></script>
+  <script src="./js/script.js"></script>
+  <script src="./js/app.js"></script>
 </body>
 
 </html>

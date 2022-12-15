@@ -3,7 +3,7 @@ let ubication = ""
 let section = ""
 
 if (navigator.serviceWorker) {
-    navigator.serviceWorker.register('/sw.js');
+    navigator.serviceWorker.register('./sw.js');
 }
 
 const Toast = Swal.mixin({
