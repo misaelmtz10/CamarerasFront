@@ -498,7 +498,7 @@ let setHistory = async (idRoom) => {
                         </td>`
                 } else if (item.status_cleaning_id === 3) {
                     content += `<td><span class="badge rounded-pill badge-success"
-                            style="background-image: linear-gradient(-45deg, #eb4444 0%, #fe044b 100%);">Liberada</span>
+                            style="background-image: linear-gradient(-45deg, #28a745 0%, #28a745 100%);">Liberada</span>
                         </td>`
                 } else if (item.status_cleaning_id === 4) {
                     content += `<td><span class="badge rounded-pill badge-danger"
