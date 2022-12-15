@@ -22,6 +22,8 @@ const isOnline = async () =>
           case "cleaned":
               console.log('entra al caso de cleaned');
               getRoomsByUserByStatusCleaned(idBul,2)
+              getRoomsByUserByStatusBlocked(idBul, 4)
+              getRoomsByUserByStatusAssigned(idBul,1)
               document.querySelector(".theme-loader").setAttribute("style", "display: none !important; ");
             break;
           default:
