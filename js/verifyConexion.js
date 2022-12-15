@@ -3,6 +3,7 @@ const isOnline = async () =>
     
   if(navigator.onLine){
       console.log('isOnline');
+      console.log('section ' + section + ' ubication ' + ubication);
       document.querySelector(".theme-loader").setAttribute("style", "display: initial !important; ");
       if (ubication === "room") {
         const paramsUrl = new URLSearchParams(document.location.search)
@@ -21,6 +22,7 @@ const isOnline = async () =>
               document.querySelector(".theme-loader").setAttribute("style", "display: none !important; ");
             break;
           default:
+              document.querySelector(".theme-loader").setAttribute("style", "display: none !important; ");
             break;
         }
       }
