@@ -318,8 +318,7 @@ let setDataFromBtn = (id, data, isUpdate) => {
             }).then((result) => {
                 //RELOAD SPINNER
                 document.querySelector(".theme-loader").setAttribute("style", "display: initial !important; ");
-                console.log("data evidence " + data.evidence);
-                console.log("picture " + picture);
+
                 if (result.isConfirmed) {
                      if (isUpdate) {
                         data.evidence = picture != null ? picture : data.evidence
