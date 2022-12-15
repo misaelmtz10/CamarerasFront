@@ -29,9 +29,9 @@ let verifySession = async () => {
             //Spinner data
             document.querySelector(".theme-loader").setAttribute("style", "display: none !important; ");
         }else{
-            window.location.href = "https://jesuscab77.github.io/Proyecto-Camareras/"
+            window.location.href = "https://misaelmtz10.github.io/CamarerasFront/"
         }
     }else{
-        window.location.href = "https://jesuscab77.github.io/Proyecto-Camareras/"
+        window.location.href = "https://misaelmtz10.github.io/CamarerasFront/"
     }
 }

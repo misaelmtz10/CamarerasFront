@@ -53,7 +53,7 @@ async function Registrar() {
                     icon: "success",
                     button: "ok",
                 });
-                setTimeout(function () { window.location.href = "https://jesuscab77.github.io/Proyecto-Camareras/"; }, 200);
+                setTimeout(function () { window.location.href = "https://misaelmtz10.github.io/CamarerasFront/"; }, 200);
             } else {
                 swal({
                     title: "Error!",
@@ -124,10 +124,10 @@ let redirectLikeRole = async () =>{
     })
     response = await request.json()
     if (response.data.role_id === 2) {
-        setTimeout(function () { window.location.href = "https://jesuscab77.github.io/Proyecto-Camareras/pages/edificio.html"; }, 200)
+        setTimeout(function () { window.location.href = "https://misaelmtz10.github.io/CamarerasFront/pages/edificio.html"; }, 200)
     } else {
         //aquí va la vista del admin
-        setTimeout(function () { window.location.href = "https://jesuscab77.github.io/Proyecto-Camareras/pages/admin/admindashboard.html"; }, 200);      
+        setTimeout(function () { window.location.href = "https://misaelmtz10.github.io/CamarerasFront/pages/admin/admindashboard.html"; }, 200);      
     }
 }
 
@@ -152,5 +152,5 @@ async function signOut (){
         });
     }
     localStorage.removeItem("myToken")
-    setTimeout(function () { window.location.href = "https://jesuscab77.github.io/Proyecto-Camareras/"; }, 200);
+    setTimeout(function () { window.location.href = "https://misaelmtz10.github.io/CamarerasFront/"; }, 200);
 }
