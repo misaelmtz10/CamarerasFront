@@ -125,6 +125,7 @@ let getRoomsByUserByStatusAssigned = (idBuilding, idStatus) => {
 }
 
 let getRoomsByUserByStatusBlocked = (idBuilding, idStatus) => {
+    listRooms = []
     fetch(`${host}/api/room/getAllByUser/${idBuilding}/${idStatus}`, {
         method: 'GET',
         headers: {
